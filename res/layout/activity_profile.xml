@@ -1,0 +1,165 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Profile" >
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/Name" />
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewName"
+        android:layout_alignBottom="@+id/textViewName"
+        android:layout_alignLeft="@+id/editTextWeight"
+        android:layout_marginRight="30dp"
+        android:layout_toRightOf="@+id/textViewName"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+       <!--
+      <CompoundButton
+        android:id="@+id/SwitchGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewGender"
+        android:layout_alignLeft="@+id/EditTextAge"
+        android:layout_alignTop="@+id/textViewGender"
+        android:layout_marginRight="30dp"
+        android:layout_toRightOf="@+id/textViewGender"
+        android:ems="10">
+    </CompoundButton>
+    -->
+
+    <TextView
+        android:id="@+id/textViewAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewName"
+        android:layout_below="@+id/textViewName"
+        android:layout_marginTop="30dp"
+        android:text="@string/Age" />
+
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewAge"
+        android:layout_alignLeft="@+id/editTextWeight"
+        android:layout_below="@+id/radioGender"
+        android:layout_marginRight="30dp"
+        android:layout_toRightOf="@+id/textViewAge"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textViewWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewAge"
+        android:layout_below="@+id/textViewAge"
+        android:layout_marginTop="30dp"
+        android:text="@string/Weight" />
+
+    <EditText
+        android:id="@+id/editTextWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewWeight"
+        android:layout_alignBottom="@+id/textViewWeight"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="30dp"
+        android:layout_toRightOf="@+id/textViewWeight"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textViewHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewWeight"
+        android:layout_below="@+id/textViewWeight"
+        android:layout_marginTop="30dp"
+        android:text="@string/Height" />
+
+    <EditText
+        android:id="@+id/editTextHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewHeight"
+        android:layout_alignBottom="@+id/textViewHeight"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="30dp"
+        android:layout_toRightOf="@+id/textViewHeight"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+     <TextView
+        android:id="@+id/textViewGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewName"
+        android:layout_below="@+id/textViewHeight"
+        android:layout_marginTop="30dp"
+        android:text="@string/Gender" />
+
+    <RadioGroup
+        android:id="@+id/radioGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/editTextName"
+        android:layout_below="@+id/editTextHeight"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:paddingTop="15dp" >
+
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Male"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:textSize="14sp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonProfileConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextHeight"
+        android:layout_alignRight="@+id/radioGender"
+        android:layout_below="@+id/radioGender"
+        android:layout_marginTop="32dp"
+        android:onClick="onConfirm"
+        android:text="Save" />
+
+</RelativeLayout>

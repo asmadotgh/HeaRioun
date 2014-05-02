@@ -1,0 +1,46 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+	<color name="light_blue">#5AD1F7</color>
+	<color name="pink">#F5658C</color>
+	<color name="lightgreen">#d6f1a6</color>
+	<color name="darkgreen">#b4e34f</color>
+	<color name="green">#c4ea79</color>
+	<color name="lightorange">#b1daff</color>
+	<color name="darkorange">#5eb0ff</color>
+	<color name="orange">#f6ee79</color>
+	<color name="lightred">#fe9a82</color>
+	<color name="darkred">#fd6f5c</color>
+	<color name="red">#fd836e</color>
+	<color name="blue">#24bbf0</color>
+	<color name="cyan">#28BCBC</color>
+	<color name="darkcyan">#206e77</color>
+	<color name="fitbitCyan">#02a9a9</color>
+	<color name="lightgrey">#eee</color>
+	<color name="darkgrey">#b8b8b8</color>
+	<color name="progress_grey">#ddd</color>
+	<color name="bg_grey">#f2f3f3</color>
+	<color name="text_darkgrey">#676666</color>
+	<color name="text_lightgrey">#888</color>
+	<color name="white">#fff</color>
+	<color name="form_lightgrey">#eeeff2</color>
+	<color name="form_darkgrey">#c1c4cd</color>
+	<color name="form_border">#a4a5a9</color>
+	<color name="violete_red">#C13881</color>
+	<color name="stair_blue">#2A2099</color>
+	
+	<color name="normal_blue">#297DDB</color>
+	<color name="dark_blue">#1F73D1</color>
+	<color name="slight_blue">#3D91EF</color>
+	
+	<color name="normal_orange">#F88017</color>
+	<color name="dark_orange">#E66C2C</color>
+	<color name="slight_orange">#FBB117</color>
+	
+	<color name="dark_green">#4D972C</color>
+	<color name="slight_green">#55DE2D</color>
+	
+	<color name="transparent">#00000000</color>
+	
+	
+</resources>
