@@ -177,7 +177,7 @@ public abstract class ImageProcessing {
         final int frameSize = width * height;
 
         int sum = decodeYUV420SPtoRedSum(yuv420sp, width, height);
-        System.out.println("avg: "+ sum/frameSize);
+        //System.out.println("avg: "+ sum/frameSize);
         return (sum / frameSize);
     }
 }

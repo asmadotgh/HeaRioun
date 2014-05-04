@@ -80,7 +80,7 @@ public class SignalProcess {
 
 		double bpm ;
 		double bpm_smooth;
-		y = hann(y);
+		//y = hann(y);
 		double [] gain=new double [y.length];
 		double [] fft_y=new double[2*y.length];
 		for(int i=0;i <y.length;i++){
@@ -91,9 +91,12 @@ public class SignalProcess {
 		//how to use:http://stackoverflow.com/questions/15226814/standard-fft-classes-library-for-android
 		//library link: https://sites.google.com/site/piotrwendykier/software/jtransforms
 		DoubleFFT_1D fft = new DoubleFFT_1D(y.length);
-		fft.realForwardFull(fft_y);
+		fft.complexForward(fft_y);
 
-		System.out.println();
+		System.out.println("Red amount");
+		for(int j=0;j<y.length; j++)
+			System.out.println(y[j]);
+		System.out.println("tule araye"+y.length);
 		for(int j=0;j<y.length;j++){
 			gain[j]=Math.sqrt(fft_y[2*j]*fft_y[2*j]+fft_y[2*j+1]*fft_y[2*j+1]);
 			System.out.println(gain[j]+" ");
@@ -114,8 +117,8 @@ public class SignalProcess {
 		MyPoint maxPeak = myMax(makePointListFromArray(gain,il,ih));
 		System.out.println("il: "+il+ " ih: "+ih);
 		System.out.println("max freq ind? "+ (maxPeak.ind+1) +"fps: "+ fps+" y.length: "+y.length);
-		bpm = (maxPeak.ind+1) * 60 * fps / y.length;
-		System.out.println("bpm: (maxPeak.ind+1) * 60 * fps / y.length"+ bpm);
+		bpm = (maxPeak.ind) * 60 * fps / y.length;
+		System.out.println("bpm: (maxPeak.ind) * 60 * fps / y.length"+ bpm);
 
 
 		//Smooth the highest peak frequency by finding the frequency that
