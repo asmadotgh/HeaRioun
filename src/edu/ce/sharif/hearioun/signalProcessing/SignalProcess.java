@@ -2,6 +2,7 @@ package edu.ce.sharif.hearioun.signalProcessing;
 
 import java.util.ArrayList;
 
+import edu.ce.sharif.hearioun.Measure;
 import edu.emory.mathcs.jtransforms.fft.DoubleFFT_1D;
 
 public class SignalProcess {
@@ -14,7 +15,6 @@ public class SignalProcess {
 	int BPM_L;							//(bpm) Min Valid heart rate
 	int BPM_H;							//(bpm) Max Valid heart rate
 	double FILTER_STABILIZATION_TIME;	//(s) Filter startup transient
-	int CUT_START_SECONDS;				//(s) Initial signal period to cut off
 	int FINE_TUNING_FREQ_INCREMENT;		//(bpm) Separation between test tones for smoothing
 
 	public SignalProcess(int [] _y, double _fps){
@@ -26,12 +26,11 @@ public class SignalProcess {
 		System.out.println();*/
 		fps=_fps;
 
-		WINDOW_SECONDS = 6;					
+		WINDOW_SECONDS = Measure.SIGNAL_SECONDS;					
 		BPM_SAMPLING_PERIOD = 1; //0.5		
 		BPM_L = 40;							
 		BPM_H = 230;						
-		FILTER_STABILIZATION_TIME = 1;	
-		CUT_START_SECONDS = 0;				
+		FILTER_STABILIZATION_TIME = 1;				
 		FINE_TUNING_FREQ_INCREMENT = 1;		
 	}
 
@@ -75,6 +74,15 @@ public class SignalProcess {
 	}
 
 	public int compute(){
+
+		
+
+		// Build and apply input filter
+		//http://en.wikipedia.org/wiki/Butterworth_filter
+		/*[b, a] = butter(2, [(((BPM_L)/60)/fps*2) (((BPM_H)/60)/fps*2)]);
+		yf = filter(b, a, y);
+		y = yf((fps * max(FILTER_STABILIZATION_TIME, CUT_START_SECONDS))+1:size(yf, 2));
+		*/
 
 		//Some initializations and precalculations
 
@@ -124,7 +132,6 @@ public class SignalProcess {
 		//Smooth the highest peak frequency by finding the frequency that
 		//best "correlates" in the resolution range around the peak
 
-		System.out.println("bpm avalie: "+bpm);
 		double freq_resolution = 1.0 / WINDOW_SECONDS;
 		double lowf = bpm / 60 - 0.5 * freq_resolution;
 		double freq_inc = FINE_TUNING_FREQ_INCREMENT / 60.0;

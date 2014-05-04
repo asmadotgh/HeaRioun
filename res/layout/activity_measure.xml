@@ -142,10 +142,10 @@
 
     <CheckBox
         android:id="@+id/autoStopCheckBox"
-        android:layout_width="500dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ButtonStart"
         android:layout_centerHorizontal="true"
-        android:text="Auto stop after 6 seconds measurement?" />
+        android:text="Autostop after 10 seconds measurement?" />
 
 </RelativeLayout>

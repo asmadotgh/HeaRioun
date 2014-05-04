@@ -51,17 +51,22 @@ public class Measure extends Activity {
 	
 	private boolean autoStop=true;
 	private CheckBox autoStop_cb;
+	
+	
 
 
 
 	/**********			START acquiring the signal			***********/
+	private boolean STARTING_NOISE=true;
+	private int CUT_START_SECONDS=2;//(s) Initial signal period to cut off
+	
 	boolean SIGNAL_ACQUIRED=false;
 	int SIGNAL_IND=0;
 	int SIGNAL[];
-	//TODO: as long as 6 seconds in the beginning
-	static int SIGNAL_SIZE=66;
-	//TODO: check signal fps 
-	static double SIGNAL_FPS=11; //23.5 old phone
+	public static int SIGNAL_SECONDS=10;//changed from 6
+	//as long as 10 seconds in the beginning
+	static int SIGNAL_SIZE=90; //instead of 66
+	static double SIGNAL_FPS=8.5; //9 // 11 previously //23.5 old phone
 
 	public void resetSignal(){
 		SIGNAL=new int[SIGNAL_SIZE];
@@ -71,6 +76,11 @@ public class Measure extends Activity {
 	}
 	public void addToSignal(int inp){
 		SIGNAL_IND=(SIGNAL_IND+1)%SIGNAL_SIZE;
+		if(STARTING_NOISE && SIGNAL_IND==((int)SIGNAL_FPS*CUT_START_SECONDS)){
+			STARTING_NOISE=false;
+			resetSignal();
+			return;
+		}
 		SIGNAL[SIGNAL_IND]=inp;
 		if(SIGNAL_IND==0){
 			SIGNAL_ACQUIRED=true;
@@ -87,8 +97,12 @@ public class Measure extends Activity {
 				progress=101;
 			}
 		}
-		else
-			tv.setText((100-progress)*6/100+1+" seconds left...");
+		else{
+			if(STARTING_NOISE)
+				tv.setText("Initializing...");
+			else
+				tv.setText((100-progress)*SIGNAL_SECONDS/100+1+" seconds left...");
+		}
 		
 		if(SIGNAL_ACQUIRED){
 			int [] input_singal=new int[SIGNAL_SIZE];
@@ -477,6 +491,7 @@ public class Measure extends Activity {
 		confirmButton.setText("Finish");
 		
 		resetSignal();
+		STARTING_NOISE=true;
 		final Parameters p = camera.getParameters();
 		p.setFlashMode(Parameters.FLASH_MODE_TORCH);
 		camera.setParameters(p);
