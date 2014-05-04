@@ -39,7 +39,7 @@ public class SignalProcess {
 
 		MyPoint maxPoint=inp.get(0);
 		for(int i=0;i<inp.size(); i++)
-			if(inp.get(i).greater(maxPoint))
+			if(inp.get(i).greaterEqual(maxPoint))
 				maxPoint=inp.get(i);
 		return maxPoint;
 	}
@@ -93,8 +93,12 @@ public class SignalProcess {
 		DoubleFFT_1D fft = new DoubleFFT_1D(y.length);
 		fft.realForwardFull(fft_y);
 
-		for(int j=0;j<y.length;j++)
+		System.out.println();
+		for(int j=0;j<y.length;j++){
 			gain[j]=Math.sqrt(fft_y[2*j]*fft_y[2*j]+fft_y[2*j+1]*fft_y[2*j+1]);
+			System.out.println(gain[j]+" ");
+		}
+		System.out.println();
 
 		//DEBUG INFO
 		/*
@@ -108,16 +112,21 @@ public class SignalProcess {
 
 		//Locate the highest peak
 		MyPoint maxPeak = myMax(makePointListFromArray(gain,il,ih));
+		System.out.println("il: "+il+ " ih: "+ih);
+		System.out.println("max freq ind? "+ (maxPeak.ind+1) +"fps: "+ fps+" y.length: "+y.length);
 		bpm = (maxPeak.ind+1) * 60 * fps / y.length;
+		System.out.println("bpm: (maxPeak.ind+1) * 60 * fps / y.length"+ bpm);
 
 
-		//TODO: Smooth the highest peak frequency by finding the frequency that
+		//Smooth the highest peak frequency by finding the frequency that
 		//best "correlates" in the resolution range around the peak
 
+		System.out.println("bpm avalie: "+bpm);
 		double freq_resolution = 1.0 / WINDOW_SECONDS;
 		double lowf = bpm / 60 - 0.5 * freq_resolution;
 		double freq_inc = FINE_TUNING_FREQ_INCREMENT / 60.0;
 		int test_freqs = (int)Math.ceil(freq_resolution / freq_inc);
+		System.out.println(test_freqs);
 		if (test_freqs>0){
 			double []power=new double [test_freqs];
 			for(int j=0;j<test_freqs;j++)
@@ -129,7 +138,7 @@ public class SignalProcess {
 				double re = 0;
 				double im = 0;
 				for (int j = 0; j<y.length;j++){
-					double phi = 2 * Math.PI * freqs[h] * (j / fps);
+					double phi = 2 * Math.PI * freqs[h] * j / fps;
 					re = re + y[j] * Math.cos(phi);
 					im = im + y[j] * Math.sin(phi);
 				}
@@ -159,7 +168,7 @@ class MyPoint{
 		val=_val;
 		ind=_ind;
 	}
-	boolean greater(MyPoint inp){
-		return this.val>inp.val;
+	boolean greaterEqual(MyPoint inp){
+		return this.val>=inp.val;
 	}
 }
