@@ -112,7 +112,6 @@ public class Measure extends Activity {
 				input_singal[i+SIGNAL_SIZE-SIGNAL_IND]=SIGNAL[i];
 			signalProcess=new SignalProcess(input_singal, SIGNAL_FPS);
 			return signalProcess.compute();
-			//TODO: do processing with FFT now!
 		}
 		return 0;
 	}
@@ -302,7 +301,6 @@ public class Measure extends Activity {
 			int imgAvg = ImageProcessing.decodeYUV420SPtoRedAvg(data.clone(), height, width);
 			//int imgAvg = ImageProcessing.getRedAvg(data.clone(), height, width);
 			addToSignal(imgAvg);
-			//TODO: check processing with FFT
 			HR=processSignal();
 			TextView tmp=(TextView)findViewById(R.id.TextViewHRAmount);
 			tmp.setText(HR+"");

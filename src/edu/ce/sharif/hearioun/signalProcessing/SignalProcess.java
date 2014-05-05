@@ -42,6 +42,19 @@ public class SignalProcess {
 				maxPoint=inp.get(i);
 		return maxPoint;
 	}
+	
+	public MyPoint myMaxPeak(ArrayList<MyPoint> inp){
+		//The array has one extra point at the begining and one extra point in the end.
+		//why? because we care about peaks. i.e. the points greater than both of their neighbours
+		MyPoint maxPoint=inp.get(1);
+		for(int i=1;i<inp.size()-1; i++){
+			MyPoint tmp=inp.get(i);
+			if(tmp.greaterEqual(inp.get(i-1)) && tmp.greaterEqual(inp.get(i+1)) && tmp.greaterEqual(maxPoint))
+				maxPoint=tmp;
+		}
+		return maxPoint;
+	}
+	
 	public ArrayList<MyPoint> makePointListFromArray(double [] inp){
 		ArrayList<MyPoint> list=new ArrayList<MyPoint>();
 		for(int i=0;i<inp.length;i++)
@@ -104,46 +117,44 @@ public class SignalProcess {
 		System.out.println("Red amount");
 		for(int j=0;j<y.length; j++)
 			System.out.println(y[j]);
-		System.out.println("tule araye"+y.length);
+		//FOR DEBUG
 		for(int j=0;j<y.length;j++){
 			gain[j]=Math.sqrt(fft_y[2*j]*fft_y[2*j]+fft_y[2*j+1]*fft_y[2*j+1]);
 			System.out.println(gain[j]+" ");
 		}
 		System.out.println();
 
-		//DEBUG INFO
-		/*
-				for(int i=0;i<gain.length;i++)
-					System.out.println(i + " "+ gain[i]);
-				System.out.println();*/
 
 		//FFT indices of frequencies where the human heartbeat is
 		int il = (int)(BPM_L * y.length / fps /60)+1;
 		int ih = (int)Math.ceil(BPM_H * y.length / fps /60)+1;
 
 		//Locate the highest peak
-		MyPoint maxPeak = myMax(makePointListFromArray(gain,il,ih));
-		System.out.println("il: "+il+ " ih: "+ih);
-		System.out.println("max freq ind? "+ (maxPeak.ind+1) +"fps: "+ fps+" y.length: "+y.length);
+		MyPoint maxPeak = myMaxPeak(makePointListFromArray(gain,il-1,ih+1));
 		bpm = (maxPeak.ind) * 60 * fps / y.length;
-		System.out.println("bpm: (maxPeak.ind) * 60 * fps / y.length"+ bpm);
+		//FOR DEBUG
+		/*System.out.println("il: "+il+ " ih: "+ih);
+		System.out.println("max freq ind? "+ (maxPeak.ind+1) +"fps: "+ fps+" y.length: "+y.length);
+		System.out.println("bpm: (maxPeak.ind) * 60 * fps / y.length"+ bpm);*/
 
 
 		//Smooth the highest peak frequency by finding the frequency that
 		//best "correlates" in the resolution range around the peak
 
 		double freq_resolution = 1.0 / WINDOW_SECONDS;
-		double lowf = bpm / 60 - 0.5 * freq_resolution;
+		double lowf = bpm / 60.0 - freq_resolution; //theoretically: 0.5*freq_resolution, but I put this for higher accuracy
 		double freq_inc = FINE_TUNING_FREQ_INCREMENT / 60.0;
-		int test_freqs = (int)Math.ceil(freq_resolution / freq_inc);
-		System.out.println(test_freqs);
+		int test_freqs = 2*(int)Math.ceil(freq_resolution / freq_inc);
 		if (test_freqs>0){
 			double []power=new double [test_freqs];
 			for(int j=0;j<test_freqs;j++)
 				power[j]=0;
 			double [] freqs=new double [test_freqs];
-			for(int j=0;j<test_freqs; j++)
+//			System.out.println("freqs that have been tested: ");
+			for(int j=0;j<test_freqs; j++){
 				freqs[j] = j * freq_inc + lowf;
+	//			System.out.println(60*freqs[j]);
+			}
 			for (int h = 0; h<test_freqs;h++){
 				double re = 0;
 				double im = 0;
