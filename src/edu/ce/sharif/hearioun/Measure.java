@@ -65,8 +65,8 @@ public class Measure extends Activity {
 	int SIGNAL[];
 	public static int SIGNAL_SECONDS=10;//changed from 6
 	//as long as 10 seconds in the beginning
-	static int SIGNAL_SIZE=90; //instead of 66
 	static double SIGNAL_FPS=8.5; //9 // 11 previously //23.5 old phone
+	static int SIGNAL_SIZE=(int) SIGNAL_FPS*SIGNAL_SECONDS; //instead of 66
 
 	public void resetSignal(){
 		SIGNAL=new int[SIGNAL_SIZE];

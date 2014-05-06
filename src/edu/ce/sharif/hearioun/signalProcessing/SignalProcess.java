@@ -2,11 +2,7 @@ package edu.ce.sharif.hearioun.signalProcessing;
 
 import java.util.ArrayList;
 
-import biz.source_code.dsp.filter.FilterCharacteristicsType;
-import biz.source_code.dsp.filter.FilterPassType;
 import biz.source_code.dsp.filter.IirFilterCoefficients;
-import biz.source_code.dsp.filter.IirFilterDesignFisher;
-
 import edu.ce.sharif.hearioun.Measure;
 import edu.emory.mathcs.jtransforms.fft.DoubleFFT_1D;
 
@@ -198,17 +194,44 @@ public class SignalProcess {
 		return (int) bpm_smooth;
 	}
 	
-	
+	boolean isValidPeak(MyIntPoint p1, MyIntPoint p2){
+		int MIN_P2P=(int)(fps*60.0/BPM_H);
+		int MAX_P2P=(int)(fps*60.0/BPM_L);
+		return ( (p2.ind-p1.ind)>=MIN_P2P && (p2.ind-p1.ind)<=MAX_P2P);
+		
+	}
 	private int countPeaks(int [] inp){
-		int num=0;
-		for(int i=1;i<inp.length-1;i++)
-			if(inp[i]>=inp[i-1] && inp[i]>=inp[i+1])
-				num++;
-		return num;
+		
+		//FOR DEBUG
+		int [] debug=new int[inp.length];
+		
+		
+		for(int i=0;i<debug.length;i++)
+			debug[i]=0;
+		ArrayList<MyIntPoint> tmp=new ArrayList<MyIntPoint>();
+		for(int i=1;i<inp.length-1;i++){
+			if((inp[i]>=inp[i-1] && inp[i]>inp[i+1]) || (inp[i]>inp[i-1] && inp[i]>=inp[i+1])){
+				MyIntPoint newPoint=new MyIntPoint(inp[i], i);
+				if(tmp.size()==0 || isValidPeak(tmp.get(tmp.size()-1), newPoint)){
+					tmp.add(newPoint);
+					debug[i]=1;
+				}
+			}
+		}
+		
+		//FOR DEBIG
+		System.out.println("peaks: ");
+		for(int i=0;i<debug.length;i++)
+			System.out.println(debug[i]);
+		
+		
+		return tmp.size();
 	}
 	
 
 	public int computeWithPeakMeasurement(){
+		//version 1: only counting local maximas
+		//version 2: counting peaks based on local maximas and minimas
 
 		// Build and apply input filter
 		
@@ -232,6 +255,21 @@ class MyPoint{
 		val=0; ind=0;
 	}
 	MyPoint(double _val, int _ind){
+		val=_val;
+		ind=_ind;
+	}
+	boolean greaterEqual(MyPoint inp){
+		return this.val>=inp.val;
+	}
+}
+
+class MyIntPoint{
+	int val;
+	int ind;
+	MyIntPoint(){
+		val=0; ind=0;
+	}
+	MyIntPoint(int _val, int _ind){
 		val=_val;
 		ind=_ind;
 	}
