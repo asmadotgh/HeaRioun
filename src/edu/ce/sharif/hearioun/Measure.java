@@ -111,7 +111,7 @@ public class Measure extends Activity {
 			for(int i=0;i<SIGNAL_IND;i++)
 				input_singal[i+SIGNAL_SIZE-SIGNAL_IND]=SIGNAL[i];
 			signalProcess=new SignalProcess(input_singal, SIGNAL_FPS);
-			return signalProcess.compute();
+			return signalProcess.computeWithPeakMeasurement();
 		}
 		return 0;
 	}

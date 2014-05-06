@@ -2,6 +2,11 @@ package edu.ce.sharif.hearioun.signalProcessing;
 
 import java.util.ArrayList;
 
+import biz.source_code.dsp.filter.FilterCharacteristicsType;
+import biz.source_code.dsp.filter.FilterPassType;
+import biz.source_code.dsp.filter.IirFilterCoefficients;
+import biz.source_code.dsp.filter.IirFilterDesignFisher;
+
 import edu.ce.sharif.hearioun.Measure;
 import edu.emory.mathcs.jtransforms.fft.DoubleFFT_1D;
 
@@ -14,22 +19,21 @@ public class SignalProcess {
 	double BPM_SAMPLING_PERIOD;			//(s) Time between heart rate estimations
 	int BPM_L;							//(bpm) Min Valid heart rate
 	int BPM_H;							//(bpm) Max Valid heart rate
+	double fcl;							// Min Valid frequency
+	double fch;							// Max Valid frequency
 	double FILTER_STABILIZATION_TIME;	//(s) Filter startup transient
 	int FINE_TUNING_FREQ_INCREMENT;		//(bpm) Separation between test tones for smoothing
 
 	public SignalProcess(int [] _y, double _fps){
 		y=_y;
-		//DEBUG INFO
-		/*System.out.println("array ro doros geref?!");
-		for(int i=0;i<y.length;i++)
-			System.out.print(y[i]+" ");
-		System.out.println();*/
 		fps=_fps;
 
 		WINDOW_SECONDS = Measure.SIGNAL_SECONDS;					
 		BPM_SAMPLING_PERIOD = 1; //0.5		
 		BPM_L = 40;							
-		BPM_H = 230;						
+		BPM_H = 230;	
+		fcl=BPM_L/60.0/fps*2;
+		fch=BPM_H/60.0/fps*2;
 		FILTER_STABILIZATION_TIME = 1;				
 		FINE_TUNING_FREQ_INCREMENT = 1;		
 	}
@@ -85,18 +89,34 @@ public class SignalProcess {
 			sum+=inp[i];
 		return (int)(sum/inp.length);
 	}
-
-	public int compute(){
-
+	
+	private void applyFilter(IirFilterCoefficients filter, double [] inp){
+		double [] res=new double [inp.length];
+		for(int i=0;i<filter.b.length;i++){
+			res[i]=0.0;
+			for(int j=0;j<i;j++){
+				res[i]+=inp[i-j]*filter.b[j];
+				if(j>0)
+					res[i]-=res[i-j]*filter.a[j];
+			}
+		}
 		
+		for(int i=0;i<inp.length;i++)
+			inp[i]=res[i];
+	}
+
+	public int computeWithFFT(){
+
 
 		// Build and apply input filter
-		//http://en.wikipedia.org/wiki/Butterworth_filter
-		/*[b, a] = butter(2, [(((BPM_L)/60)/fps*2) (((BPM_H)/60)/fps*2)]);
-		yf = filter(b, a, y);
-		y = yf((fps * max(FILTER_STABILIZATION_TIME, CUT_START_SECONDS))+1:size(yf, 2));
-		*/
+		//src: http://www.source-code.biz/dsp/java/apidocs/biz/source_code/dsp/filter/IirFilterDesignFisher.html
+		//design(FilterPassType filterPassType, FilterCharacteristicsType filterCharacteristicsType, int filterOrder, double ripple, double fcf1, double fcf2);
+		//ripple is ignored for filters rather than chebychev
+		/*
+		IirFilterCoefficients butterworth= IirFilterDesignFisher.design(FilterPassType.bandpass, FilterCharacteristicsType.butterworth, 2, -1, fcl, fch);
+		applyFilter(butterworth,y);*/
 
+		
 		//Some initializations and precalculations
 
 		double bpm ;
@@ -118,14 +138,17 @@ public class SignalProcess {
 		for(int j=0;j<y.length; j++)
 			System.out.println(y[j]);
 		//FOR DEBUG
+		System.out.println();
+		System.out.println("FFT: ");
 		for(int j=0;j<y.length;j++){
 			gain[j]=Math.sqrt(fft_y[2*j]*fft_y[2*j]+fft_y[2*j+1]*fft_y[2*j+1]);
 			System.out.println(gain[j]+" ");
 		}
 		System.out.println();
+		
+		
 
-
-		//FFT indices of frequencies where the human heartbeat is
+		//FFT indices of frequencies where the human heart rate is
 		int il = (int)(BPM_L * y.length / fps /60)+1;
 		int ih = (int)Math.ceil(BPM_H * y.length / fps /60)+1;
 
@@ -150,11 +173,8 @@ public class SignalProcess {
 			for(int j=0;j<test_freqs;j++)
 				power[j]=0;
 			double [] freqs=new double [test_freqs];
-//			System.out.println("freqs that have been tested: ");
-			for(int j=0;j<test_freqs; j++){
+			for(int j=0;j<test_freqs; j++)
 				freqs[j] = j * freq_inc + lowf;
-	//			System.out.println(60*freqs[j]);
-			}
 			for (int h = 0; h<test_freqs;h++){
 				double re = 0;
 				double im = 0;
@@ -176,6 +196,32 @@ public class SignalProcess {
 		 */
 
 		return (int) bpm_smooth;
+	}
+	
+	
+	private int countPeaks(int [] inp){
+		int num=0;
+		for(int i=1;i<inp.length-1;i++)
+			if(inp[i]>=inp[i-1] && inp[i]>=inp[i+1])
+				num++;
+		return num;
+	}
+	
+
+	public int computeWithPeakMeasurement(){
+
+		// Build and apply input filter
+		
+		double bpm ;
+		//y = hann(y);
+
+		System.out.println("Red amount");
+		for(int j=0;j<y.length; j++)
+			System.out.println(y[j]);
+		int noPeaks=countPeaks(y);
+		System.out.println("noPeaks: "+noPeaks+" window seconds: "+WINDOW_SECONDS);
+		bpm=noPeaks*60.0/WINDOW_SECONDS;
+		return (int) bpm;
 	}
 }
 

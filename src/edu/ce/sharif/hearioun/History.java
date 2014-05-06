@@ -4,22 +4,21 @@ package edu.ce.sharif.hearioun;
 import java.text.DecimalFormat;
 import java.util.Random;
 
+import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.PointF;
+import android.os.Bundle;
+import android.util.FloatMath;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.Button;
+
 import com.androidplot.Plot;
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.PointF;
-import android.util.FloatMath;
-import android.view.Menu;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnTouchListener;
-import android.widget.Button;
 
 public class History extends Activity implements OnTouchListener{
 
