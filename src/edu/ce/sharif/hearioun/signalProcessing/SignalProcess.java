@@ -228,7 +228,6 @@ public class SignalProcess {
 	}
 
 	private int countPeaks2(int [] inp){
-
 		//version 3
 		int num=0;
 		ArrayList<Integer> tmp=new ArrayList<Integer>();
@@ -239,12 +238,9 @@ public class SignalProcess {
 				tmp.add(-1);
 		}
 
-		System.out.println("slopes != 0 : ");
-		for(int i=0;i<tmp.size()-1;i++){
-			System.out.println(tmp.get(i));
-			if(tmp.get(i)==-1 && tmp.get(i+1)==1)
+		for(int i=0;i<tmp.size()-1;i++)
+			if(tmp.get(i)==1 && tmp.get(i+1)==-1)
 				num++;
-		}
 
 		return num;
 	}
@@ -254,19 +250,58 @@ public class SignalProcess {
 		//version 1: only counting local maximas
 		//version 2: counting peaks based on local maximas and minimas
 		//version 3: counting peaks based on slope
+		//version 4: version 3+ smoothing BPM with calculating power
 
 		// Build and apply input filter
 
 		double bpm ;
 		//y = hann(y);
 
-		System.out.println("Red amount");
+		//FOR DEBUG
+		/*System.out.println("Red amount");
 		for(int j=0;j<y.length; j++)
-			System.out.println(y[j]);
+			System.out.println(y[j]);*/
 		int noPeaks=countPeaks2(y);
-		System.out.println("noPeaks: "+noPeaks+" window seconds: "+WINDOW_SECONDS);
+		//System.out.println("noPeaks: "+noPeaks+" window seconds: "+WINDOW_SECONDS);
 		bpm=noPeaks*60.0/WINDOW_SECONDS;
-		return (int) bpm;
+		return smoothBPMwithFFT(bpm);
+	}
+
+	private int smoothBPMwithFFT(double bpm){
+		int bpm_smooth=(int) bpm;
+
+
+		//Smooth the highest peak frequency by finding the frequency that
+		//best "correlates" in the resolution range around the peak
+
+		double freq_resolution = 1.0 / WINDOW_SECONDS;
+		double lowf = bpm / 60.0 - freq_resolution; //theoretically: 0.5*freq_resolution, but I put this for higher accuracy
+		double freq_inc = FINE_TUNING_FREQ_INCREMENT / 60.0;
+		int test_freqs = 2*(int)Math.ceil(freq_resolution / freq_inc);
+		if (test_freqs>0){
+			double []power=new double [test_freqs];
+			for(int j=0;j<test_freqs;j++)
+				power[j]=0;
+			double [] freqs=new double [test_freqs];
+			for(int j=0;j<test_freqs; j++)
+				freqs[j] = j * freq_inc + lowf;
+			for (int h = 0; h<test_freqs;h++){
+				double re = 0;
+				double im = 0;
+				for (int j = 0; j<y.length;j++){
+					double phi = 2 * Math.PI * freqs[h] * j / fps;
+					re = re + y[j] * Math.cos(phi);
+					im = im + y[j] * Math.sin(phi);
+				}
+				power[h] = re * re + im * im;
+			}
+			MyPoint maxPeak= myMax(makePointListFromArray(power));
+			bpm_smooth = (int) (60*freqs[maxPeak.ind]);
+		}
+		else
+			bpm_smooth= (int) bpm;
+
+		return bpm_smooth;
 	}
 }
 
