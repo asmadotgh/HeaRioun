@@ -42,7 +42,7 @@ public class SignalProcess {
 				maxPoint=inp.get(i);
 		return maxPoint;
 	}
-	
+
 	public MyPoint myMaxPeak(ArrayList<MyPoint> inp){
 		//The array has one extra point at the begining and one extra point in the end.
 		//why? because we care about peaks. i.e. the points greater than both of their neighbours
@@ -54,7 +54,7 @@ public class SignalProcess {
 		}
 		return maxPoint;
 	}
-	
+
 	public ArrayList<MyPoint> makePointListFromArray(double [] inp){
 		ArrayList<MyPoint> list=new ArrayList<MyPoint>();
 		for(int i=0;i<inp.length;i++)
@@ -85,7 +85,7 @@ public class SignalProcess {
 			sum+=inp[i];
 		return (int)(sum/inp.length);
 	}
-	
+
 	private void applyFilter(IirFilterCoefficients filter, double [] inp){
 		double [] res=new double [inp.length];
 		for(int i=0;i<filter.b.length;i++){
@@ -96,7 +96,7 @@ public class SignalProcess {
 					res[i]-=res[i-j]*filter.a[j];
 			}
 		}
-		
+
 		for(int i=0;i<inp.length;i++)
 			inp[i]=res[i];
 	}
@@ -112,7 +112,7 @@ public class SignalProcess {
 		IirFilterCoefficients butterworth= IirFilterDesignFisher.design(FilterPassType.bandpass, FilterCharacteristicsType.butterworth, 2, -1, fcl, fch);
 		applyFilter(butterworth,y);*/
 
-		
+
 		//Some initializations and precalculations
 
 		double bpm ;
@@ -141,8 +141,8 @@ public class SignalProcess {
 			System.out.println(gain[j]+" ");
 		}
 		System.out.println();
-		
-		
+
+
 
 		//FFT indices of frequencies where the human heart rate is
 		int il = (int)(BPM_L * y.length / fps /60)+1;
@@ -193,19 +193,19 @@ public class SignalProcess {
 
 		return (int) bpm_smooth;
 	}
-	
+
 	boolean isValidPeak(MyIntPoint p1, MyIntPoint p2){
 		int MIN_P2P=(int)(fps*60.0/BPM_H);
 		int MAX_P2P=(int)(fps*60.0/BPM_L);
 		return ( (p2.ind-p1.ind)>=MIN_P2P && (p2.ind-p1.ind)<=MAX_P2P);
-		
+
 	}
 	private int countPeaks(int [] inp){
-		
+		//version 2
+
 		//FOR DEBUG
 		int [] debug=new int[inp.length];
-		
-		
+
 		for(int i=0;i<debug.length;i++)
 			debug[i]=0;
 		ArrayList<MyIntPoint> tmp=new ArrayList<MyIntPoint>();
@@ -218,30 +218,52 @@ public class SignalProcess {
 				}
 			}
 		}
-		
+
 		//FOR DEBIG
 		System.out.println("peaks: ");
 		for(int i=0;i<debug.length;i++)
 			System.out.println(debug[i]);
-		
-		
+
 		return tmp.size();
 	}
-	
+
+	private int countPeaks2(int [] inp){
+
+		//version 3
+		int num=0;
+		ArrayList<Integer> tmp=new ArrayList<Integer>();
+		for(int i=1;i<inp.length;i++){
+			if(inp[i]>inp[i-1])
+				tmp.add(1);
+			else if (inp[i]<inp[i-1])
+				tmp.add(-1);
+		}
+
+		System.out.println("slopes != 0 : ");
+		for(int i=0;i<tmp.size()-1;i++){
+			System.out.println(tmp.get(i));
+			if(tmp.get(i)==-1 && tmp.get(i+1)==1)
+				num++;
+		}
+
+		return num;
+	}
+
 
 	public int computeWithPeakMeasurement(){
 		//version 1: only counting local maximas
 		//version 2: counting peaks based on local maximas and minimas
+		//version 3: counting peaks based on slope
 
 		// Build and apply input filter
-		
+
 		double bpm ;
 		//y = hann(y);
 
 		System.out.println("Red amount");
 		for(int j=0;j<y.length; j++)
 			System.out.println(y[j]);
-		int noPeaks=countPeaks(y);
+		int noPeaks=countPeaks2(y);
 		System.out.println("noPeaks: "+noPeaks+" window seconds: "+WINDOW_SECONDS);
 		bpm=noPeaks*60.0/WINDOW_SECONDS;
 		return (int) bpm;
