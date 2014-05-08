@@ -105,7 +105,7 @@
         android:text="" />
 
     <TextView
-        android:id="@+id/TextViewHRV"
+        android:id="@+id/TextViewBR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ECG"
@@ -114,18 +114,18 @@
         android:layout_marginRight="36dp"
         android:textSize="24sp"
         android:typeface="serif"
-        android:text="HRV" />
+        android:text="BR" />
     
     <TextView
-        android:id="@+id/TextViewHRVAmount"
+        android:id="@+id/TextViewBRAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TextViewHRV"
-        android:layout_alignLeft="@+id/TextViewHRV"
+        android:layout_below="@+id/TextViewBR"
+        android:layout_alignLeft="@+id/TextViewBR"
         android:layout_centerVertical="true"
         android:textSize="24sp"
         android:typeface="serif"
-        android:text="10" />
+        android:text="" />
     
 
 

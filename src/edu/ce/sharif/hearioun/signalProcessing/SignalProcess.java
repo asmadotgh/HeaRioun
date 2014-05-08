@@ -7,29 +7,53 @@ import edu.ce.sharif.hearioun.Measure;
 import edu.emory.mathcs.jtransforms.fft.DoubleFFT_1D;
 
 public class SignalProcess {
+	//FOR HR
 	int []y;
+
+	//FOR BR
+	int[]y_BR;
+	final static int AVERAGING_LENGTH=10;
+
 	double fps;
 
 	// Parameters to play with
-	int WINDOW_SECONDS;					//(s) Sliding window length
-	double BPM_SAMPLING_PERIOD;			//(s) Time between heart rate estimations
-	int BPM_L;							//(bpm) Min Valid heart rate
-	int BPM_H;							//(bpm) Max Valid heart rate
-	double fcl;							// Min Valid frequency
-	double fch;							// Max Valid frequency
+	double WINDOW_SECONDS;					//(s) Sliding window length
+	double BPM_SAMPLING_PERIOD;				//(s) Time between heart rate estimations
+	int BPM_L;								//(bpm) Min Valid heart rate
+	int BPM_H;								//(bpm) Max Valid heart rate
+	int BR_L;								//(BR) Min Valid breathing rate
+	int BR_H;								//(BR) Max Valid breathing rate
+	//double fcl;							// Min Valid frequency
+	//double fch;							// Max Valid frequency
 	double FILTER_STABILIZATION_TIME;	//(s) Filter startup transient
 	int FINE_TUNING_FREQ_INCREMENT;		//(bpm) Separation between test tones for smoothing
 
+	private void myAverageFilter(int [] inp, int [] out, int length){
+		int sum=0;
+		for(int i=0;i<inp.length;i++){
+			sum+=inp[i];
+			if(i>=length)
+				sum-=inp[i-length];
+
+			if(i<length)
+				out[i]=sum/(i+1);
+			else
+				out[i]=sum/length;
+		}
+	}
 	public SignalProcess(int [] _y, double _fps){
 		y=_y;
+		y_BR=new int[y.length];
 		fps=_fps;
 
 		WINDOW_SECONDS = Measure.SIGNAL_SECONDS;					
 		BPM_SAMPLING_PERIOD = 1; //0.5		
 		BPM_L = 40;							
 		BPM_H = 230;	
-		fcl=BPM_L/60.0/fps*2;
-		fch=BPM_H/60.0/fps*2;
+		BR_L=8;
+		BR_H=60;
+		//fcl=BPM_L/60.0/fps*2;
+		//fch=BPM_H/60.0/fps*2;
 		FILTER_STABILIZATION_TIME = 1;				
 		FINE_TUNING_FREQ_INCREMENT = 1;		
 	}
@@ -44,7 +68,7 @@ public class SignalProcess {
 	}
 
 	public MyPoint myMaxPeak(ArrayList<MyPoint> inp){
-		//The array has one extra point at the begining and one extra point in the end.
+		//The array has one extra point at the beginning and one extra point in the end.
 		//why? because we care about peaks. i.e. the points greater than both of their neighbours
 		MyPoint maxPoint=inp.get(1);
 		for(int i=1;i<inp.size()-1; i++){
@@ -258,16 +282,44 @@ public class SignalProcess {
 		//y = hann(y);
 
 		//FOR DEBUG
-		/*System.out.println("Red amount");
+		System.out.println("Red amount");
 		for(int j=0;j<y.length; j++)
-			System.out.println(y[j]);*/
+			System.out.println(y[j]);
+		System.out.println();
+
 		int noPeaks=countPeaks2(y);
 		//System.out.println("noPeaks: "+noPeaks+" window seconds: "+WINDOW_SECONDS);
 		bpm=noPeaks*60.0/WINDOW_SECONDS;
-		return smoothBPMwithFFT(bpm);
+		return smoothBPMwithPower(BPM_L, BPM_H, bpm,y);
 	}
 
-	private int smoothBPMwithFFT(double bpm){
+	public int computeBRWithPeakMeasurement(){
+		//double average filter for finding out breathing pattern
+
+		double br;
+
+		myAverageFilter(y, y_BR, AVERAGING_LENGTH);
+		myAverageFilter(y_BR, y_BR, AVERAGING_LENGTH);
+
+		//FOR DEBUG
+		System.out.println("Smoothed for BR measurement:");
+		for(int j=0;j<y_BR.length; j++)
+			System.out.println(y_BR[j]);
+		System.out.println();
+
+		int noPeaks=countPeaks2(y_BR);
+		if(noPeaks==0)
+			noPeaks=1;
+
+		br=noPeaks*60.0/WINDOW_SECONDS;
+		if(br<BR_L)
+			br=BR_L;
+		if(br>BR_H)
+			br=BR_H;
+		return smoothBPMwithPower(BR_L, BR_H, br,y_BR);
+	}
+
+	private int smoothBPMwithPower(int lowVal, int highVal, double bpm, int [] array){
 		int bpm_smooth=(int) bpm;
 
 
@@ -288,10 +340,10 @@ public class SignalProcess {
 			for (int h = 0; h<test_freqs;h++){
 				double re = 0;
 				double im = 0;
-				for (int j = 0; j<y.length;j++){
+				for (int j = 0; j<array.length;j++){
 					double phi = 2 * Math.PI * freqs[h] * j / fps;
-					re = re + y[j] * Math.cos(phi);
-					im = im + y[j] * Math.sin(phi);
+					re = re + array[j] * Math.cos(phi);
+					im = im + array[j] * Math.sin(phi);
 				}
 				power[h] = re * re + im * im;
 			}
@@ -301,6 +353,10 @@ public class SignalProcess {
 		else
 			bpm_smooth= (int) bpm;
 
+		if(bpm_smooth<lowVal)
+			bpm_smooth=lowVal;
+		if(bpm_smooth>highVal)
+			bpm_smooth=highVal;
 		return bpm_smooth;
 	}
 }

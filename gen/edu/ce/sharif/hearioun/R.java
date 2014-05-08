@@ -108,10 +108,10 @@ public final class R {
         public static final int ButtonStart=0x7f0a0017;
         public static final int ECG=0x7f0a000b;
         public static final int ECGLine=0x7f0a000d;
+        public static final int TextViewBR=0x7f0a0015;
+        public static final int TextViewBRAmount=0x7f0a0016;
         public static final int TextViewHR=0x7f0a0013;
         public static final int TextViewHRAmount=0x7f0a0014;
-        public static final int TextViewHRV=0x7f0a0015;
-        public static final int TextViewHRVAmount=0x7f0a0016;
         public static final int action_settings=0x7f0a0029;
         public static final int aprHistoryPlot=0x7f0a0026;
         public static final int autoStopCheckBox=0x7f0a0018;

@@ -31,13 +31,10 @@ import edu.ce.sharif.hearioun.signalProcessing.SignalProcess;
 
 public class Measure extends Activity {
 
-	//FOR DEBUG
-	/*long alaki_time=0;
-	int alaki_frame;*/
 	
 	SignalProcess signalProcess=null;
 
-	static int HR=0, HRV=0;
+	static int HR=0, BR=0;
 	private static Camera camera=null;
 
 	//private View image = null;
@@ -63,16 +60,21 @@ public class Measure extends Activity {
 	boolean SIGNAL_ACQUIRED=false;
 	int SIGNAL_IND=0;
 	int SIGNAL[];
-	public static int SIGNAL_SECONDS=10;//changed from 6
+	public static double SIGNAL_SECONDS=10.0;//changed from 6
 	//as long as 10 seconds in the beginning
 	static double SIGNAL_FPS=8.5; //9 // 11 previously //23.5 old phone
-	static int SIGNAL_SIZE=(int) SIGNAL_FPS*SIGNAL_SECONDS; //instead of 66
+	static int SIGNAL_SIZE=(int) (SIGNAL_FPS*SIGNAL_SECONDS); //instead of 66
+	
+	//FOR DYNAMIC MEASURMENT OF FPS RELATED STUFF
+	private long start_time, end_time;
 
 	public void resetSignal(){
 		SIGNAL=new int[SIGNAL_SIZE];
 		SIGNAL_ACQUIRED=false;
 		SIGNAL_IND=0;
 		progress=0;
+		//FOR DYNAMIC MEASURMENT OF FPS RELATED STUFF
+		start_time=System.currentTimeMillis();
 	}
 	public void addToSignal(int inp){
 		SIGNAL_IND=(SIGNAL_IND+1)%SIGNAL_SIZE;
@@ -84,9 +86,21 @@ public class Measure extends Activity {
 		SIGNAL[SIGNAL_IND]=inp;
 		if(SIGNAL_IND==0){
 			SIGNAL_ACQUIRED=true;
-		}
+			//FOR DYNAMIC MEASURMENT OF FPS RELATED STUFF
+			end_time=System.currentTimeMillis();
+			SIGNAL_SECONDS=(end_time-start_time)/1000.0;
+		}else if (SIGNAL_IND==1)
+			start_time=System.currentTimeMillis();
 	}
-	public int processSignal(){
+	
+	private double myMin(double d1, double d2){
+		if(d1<d2)
+			return d1;
+		return d2;
+	}
+	
+	public MyPoint processSignal(){
+		MyPoint res= new MyPoint();
 		TextView tv=(TextView) findViewById(R.id.progressText);
 		autoStop=autoStop_cb.isChecked();
 		if (progress>=100){
@@ -101,7 +115,7 @@ public class Measure extends Activity {
 			if(STARTING_NOISE)
 				tv.setText("Initializing...");
 			else
-				tv.setText((100-progress)*SIGNAL_SECONDS/100+1+" seconds left...");
+				tv.setText((int) (myMin(((100-progress)*myMin(SIGNAL_SECONDS,10)/100)+1,10))+" seconds left...");
 		}
 		
 		if(SIGNAL_ACQUIRED){
@@ -111,9 +125,10 @@ public class Measure extends Activity {
 			for(int i=0;i<SIGNAL_IND;i++)
 				input_singal[i+SIGNAL_SIZE-SIGNAL_IND]=SIGNAL[i];
 			signalProcess=new SignalProcess(input_singal, SIGNAL_FPS);
-			return signalProcess.computeWithPeakMeasurement();
+			res.val1= signalProcess.computeWithPeakMeasurement();
+			res.val2= signalProcess.computeBRWithPeakMeasurement();
 		}
-		return 0;
+		return res;
 	}
 
 	/**********			END acquiring the signal			***********/
@@ -275,7 +290,6 @@ public class Measure extends Activity {
 	}
 
 
-
 	private PreviewCallback previewCallback = new PreviewCallback() {
 
 		@Override
@@ -297,14 +311,19 @@ public class Measure extends Activity {
 			int width = size.width;
 			int height = size.height;
 
-			/************			START processing signal with FFT			**********/
+			/************			START processing signal 					**********/
 			int imgAvg = ImageProcessing.decodeYUV420SPtoRedAvg(data.clone(), height, width);
 			//int imgAvg = ImageProcessing.getRedAvg(data.clone(), height, width);
 			addToSignal(imgAvg);
-			HR=processSignal();
-			TextView tmp=(TextView)findViewById(R.id.TextViewHRAmount);
-			tmp.setText(HR+"");
-			/************			END processing signal with FFT				**********/
+			MyPoint res=processSignal();
+			HR=res.val1;
+			TextView hr=(TextView)findViewById(R.id.TextViewHRAmount);
+			hr.setText(HR+"");
+			
+			BR=res.val2;
+			TextView br=(TextView)findViewById(R.id.TextViewBRAmount);
+			br.setText(BR+"");
+			/************			END processing signal 						**********/
 
 
 
@@ -507,4 +526,15 @@ public class Measure extends Activity {
 		}
 	}
 
+	class MyPoint{
+		int val1, val2;
+		MyPoint(){
+			val1=0;
+			val2=0;
+		}
+		MyPoint(int _val1, int _val2){
+			val1=_val1;
+			val2=_val2;
+		}
+	}
 }
