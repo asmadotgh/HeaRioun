@@ -37,6 +37,19 @@
         android:src="@drawable/needle" />
 
     </FrameLayout>
+    
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="65dp"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:id="@+id/testView"
+        android:background="@color/cyan"
+        >
+        
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/imageViewBeat"
         android:layout_width="wrap_content"

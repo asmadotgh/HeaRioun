@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
-import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
@@ -24,10 +23,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import edu.ce.sharif.hearioun.signalProcessing.ImageProcessing;
 import edu.ce.sharif.hearioun.signalProcessing.SignalProcess;
+import graphicComponents.ECGCanvas;
 
 public class Measure extends Activity {
 
@@ -51,6 +52,11 @@ public class Measure extends Activity {
 	
 	
 
+	/**********			START drawing beating graph			***********/
+	ECGCanvas canvas;
+    LinearLayout drawingGraph;
+	
+	/**********			END drawing beating graph			***********/
 
 
 	/**********			START acquiring the signal			***********/
@@ -75,6 +81,10 @@ public class Measure extends Activity {
 		progress=0;
 		//FOR DYNAMIC MEASURMENT OF FPS RELATED STUFF
 		start_time=System.currentTimeMillis();
+		
+		//reset graphical components
+		canvas=new ECGCanvas();
+		
 	}
 	public void addToSignal(int inp){
 		SIGNAL_IND=(SIGNAL_IND+1)%SIGNAL_SIZE;
@@ -219,6 +229,11 @@ public class Measure extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_measure);
+		
+		
+		canvas=new ECGCanvas();
+	    drawingGraph = (LinearLayout) findViewById(R.id.testView); 
+	    drawingGraph.setBackgroundDrawable(canvas.tick());    
 
 		//initializing progress bar
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -294,10 +309,13 @@ public class Measure extends Activity {
 
 		@Override
 		public void onPreviewFrame(byte[] data, Camera cam) {
+		
+			//draw flat line if not beating
+			if (!beating){
+				BitmapDrawable tmp=canvas.flat();
+				drawingGraph.setBackground(tmp);
+			}
 			
-			//FOR DEBUG
-			/*alaki_frame++;*/
-
 			if (data == null) throw new NullPointerException();
 			Camera.Size size = cam.getParameters().getPreviewSize();
 			if (size == null) throw new NullPointerException();
@@ -397,6 +415,15 @@ public class Measure extends Activity {
 	};
 
 	private void beat_on(){
+		//if in the initialization mode, no need to draw
+		if(STARTING_NOISE)
+			return;
+		
+		//update animated drawing of beating graph
+		canvas.isDrawing=processing.get();
+		BitmapDrawable tmp=canvas.tick();
+		drawingGraph.setBackground(tmp);
+
 		direction=-1;
 		beat();
 		MediaPlayer sound = MediaPlayer.create(this, R.raw.beat); 
@@ -406,6 +433,7 @@ public class Measure extends Activity {
 
 	}
 	private void beat_off(){
+		
 		direction=0;
 		beat();
 		beating=false;
@@ -525,6 +553,8 @@ public class Measure extends Activity {
 			myStart();
 		}
 	}
+	
+	
 
 	class MyPoint{
 		int val1, val2;
