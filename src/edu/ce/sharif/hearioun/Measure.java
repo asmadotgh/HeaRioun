@@ -116,7 +116,7 @@ public class Measure extends Activity {
 		autoStop=autoStop_cb.isChecked();
 		if (progress>=100){
 			tv.setText("Done!");
-			//if still measuring, toggles as if the finish button is clicked
+			//if still measuring, toggles as if the stop button is clicked
 			if(autoStop && progress==100){
 				myStop();
 				progress=101;
@@ -239,7 +239,7 @@ public class Measure extends Activity {
 		
 		canvas=new ECGCanvas();
 	    drawingGraph = (LinearLayout) findViewById(R.id.testView); 
-	    drawingGraph.setBackgroundDrawable(canvas.tick());    
+	    drawingGraph.setBackgroundDrawable(canvas.drawECG());    
 
 		//initializing progress bar
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -321,6 +321,9 @@ public class Measure extends Activity {
 				canvas.isBeating=beating;
 				BitmapDrawable tmp=canvas.drawECG();
 				drawingGraph.setBackground(tmp);
+				/*LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)drawingGraph.getLayoutParams();
+				params.setMargins(100,0,0,0);
+				drawingGraph.setLayoutParams(params);*/
 			}
 			
 			if (data == null) throw new NullPointerException();
@@ -373,10 +376,6 @@ public class Measure extends Activity {
 			if (imgAvg < rollingAverage) {
 				newType = TYPE.RED;
 				if (newType != currentType) {
-					/*beats++;
-                    HR++;
-                    TextView tmp=(TextView)findViewById(R.id.TextViewHRAmount);
-                    tmp.setText(HR+"");*/
 					beat_on();
 				}
 			} else if (imgAvg > rollingAverage) {
@@ -393,27 +392,6 @@ public class Measure extends Activity {
 				//image.postInvalidate();
 			}
 
-			/*long endTime = System.currentTimeMillis();
-			double totalTimeInSecs = (endTime - startTime) / 1000d;
-			if (totalTimeInSecs >= 10) {
-				double bps = (beats / totalTimeInSecs);
-				int dpm = (int) (bps * 60d);
-				if (dpm < 30 || dpm > 180) {
-					startTime = System.currentTimeMillis();
-					beats = 0;
-					processing.set(false);
-					return;
-				}
-
-
-				if (beatsIndex == beatsArraySize) beatsIndex = 0;
-				beatsArray[beatsIndex] = dpm;
-				beatsIndex++;
-
-				
-				startTime = System.currentTimeMillis();
-				beats = 0;
-			}*/
 			processing.set(false);
 
 			/************			END animating heart beat					**********/
@@ -424,6 +402,8 @@ public class Measure extends Activity {
 	private void beat_on(){
 		//if in the initialization mode, no need to draw
 		if(STARTING_NOISE)
+			return;
+		if(needleIndex!=0)
 			return;
 		direction=-1;
 		beat();
@@ -538,7 +518,7 @@ public class Measure extends Activity {
 		
 		new Thread(progressRunnable).start();
 		Button confirmButton = (Button) Measure.this.findViewById(R.id.ButtonStart);
-		confirmButton.setText("Finish");
+		confirmButton.setText("Stop");
 		
 		resetSignal();
 		STARTING_NOISE=true;

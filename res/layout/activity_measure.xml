@@ -141,6 +141,35 @@
         android:text="" />
     
 
+    <ImageButton
+        android:id="@+id/stopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageViewBeat"
+        android:layout_marginTop="170dp"
+        android:src="@drawable/help" />
+    
+    <ImageButton
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageViewBeat"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="170dp"
+        android:layout_toRightOf="@+id/stopButton"
+        android:src="@drawable/help" />
+    
+    <ImageButton
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageViewBeat"
+        android:layout_toRightOf="@+id/startButton"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="170dp"
+        android:src="@drawable/help" />
+    
+    
 
     <Button
         android:id="@+id/ButtonStart"

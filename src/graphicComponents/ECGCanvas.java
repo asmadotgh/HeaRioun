@@ -12,7 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 public class ECGCanvas{
 
 	static int BEAT[];
-	final static int SPEED=-7;
+	final static int SPEED=7;
 	
 	final static int OFFSET=25;
 	int lastX;
@@ -58,7 +58,7 @@ public class ECGCanvas{
 		noOfTicks=0;
 		
 		matrix = new Matrix();
-		matrix.setTranslate(-1*SPEED, 0);
+		matrix.postTranslate((-1)*SPEED, 0);
 		
 		path = new Path();    
 		paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -80,21 +80,23 @@ public class ECGCanvas{
 	}
 	
 	public BitmapDrawable drawECG(){
-		//canvas.concat(matrix);
+		
+		path=new Path();
 		if(isBeating){
-			path.moveTo(lastX, BEAT[(path_ind+PATH_SIZE-1)%PATH_SIZE]);
-			lastX+=SPEED;
+			path.moveTo(lastX+SPEED, BEAT[(path_ind+PATH_SIZE-1)%PATH_SIZE]);
+			//lastX+=SPEED;
 			path.lineTo(lastX, BEAT[path_ind]);
 			canvas.drawPath(path, paint);
 			path_ind=(path_ind+1)%PATH_SIZE;
 
 		}else{
 			path_ind=0;
-			path.moveTo(lastX, OFFSET);
-			lastX+=SPEED;
+			path.moveTo(lastX+SPEED, OFFSET);
+			//lastX+=SPEED;
 			path.lineTo(lastX, OFFSET);
 			canvas.drawPath(path, paint);
 		}
+		canvas.concat(matrix);
 		return new BitmapDrawable(bg);
 	}
 
@@ -109,9 +111,6 @@ public class ECGCanvas{
 		
 		if(isBeating){
 			for(int i=0;i<PATH_SIZE;i++){
-				/*double currentTime=System.currentTimeMillis();
-				while (currentTime-startTime<moveTime)
-					currentTime=System.currentTimeMillis();*/
 				path.moveTo(lastX, BEAT[(path_ind+PATH_SIZE-1)%PATH_SIZE]);
 				lastX+=SPEED;
 				path.lineTo(lastX, BEAT[path_ind]);
@@ -120,17 +119,7 @@ public class ECGCanvas{
 
 				path_ind=(path_ind+1)%PATH_SIZE;
 			}
-//			noOfTicks++;
 		}
-		/*
-		if(noOfTicks>=5){
-			moveCanvas=true;
-			noOfTicks=5;
-		}
-		if(moveCanvas){
-			canvas.drawBitmap(bg, SPEED*PATH_SIZE, 0, paint);
-			canvas.concat(matrix);
-		}*/
 		return new BitmapDrawable(bg);
 	}
 
