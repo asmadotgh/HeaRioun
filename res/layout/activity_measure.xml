@@ -67,7 +67,7 @@
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/imageViewBeat"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/progress_still"
 		/>
         
@@ -78,7 +78,7 @@
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/imageViewBeat"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
         android:visibility="invisible"
 />
         
@@ -88,6 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/progressBar"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:textSize="18sp"
         android:typeface="serif"
@@ -147,17 +148,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageViewBeat"
         android:layout_marginTop="170dp"
-        android:src="@drawable/help" />
+        android:layout_marginLeft="20dp"
+        android:onClick="stopClicked"
+        android:src="@drawable/stop" />
     
     <ImageButton
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageViewBeat"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginLeft="35dp"
         android:layout_toRightOf="@+id/stopButton"
-        android:src="@drawable/help" />
+        android:onClick="startClicked"
+        android:src="@drawable/start" />
     
     <ImageButton
         android:id="@+id/resetButton"
@@ -165,28 +169,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageViewBeat"
         android:layout_toRightOf="@+id/startButton"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="35dp"
         android:layout_marginTop="170dp"
-        android:src="@drawable/help" />
+        android:onClick="resetClicked"
+        android:src="@drawable/reset" />
     
     
-
-    <Button
-        android:id="@+id/ButtonStart"
-        android:layout_width="150dp"
-        android:layout_height="55dp"
-        android:layout_below="@+id/imageViewBeat"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="170dp"
-        android:textSize="16dp"
-        android:onClick="interpretMessage"
-        android:text="Start" />
 
     <CheckBox
         android:id="@+id/autoStopCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ButtonStart"
+        android:layout_below="@+id/startButton"
         android:layout_centerHorizontal="true"
         android:text="Autostop after 10 seconds measurement?" />
 

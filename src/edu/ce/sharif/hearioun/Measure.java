@@ -20,8 +20,8 @@ import android.os.Message;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -172,11 +172,21 @@ public class Measure extends Activity {
             @Override
             public void handleMessage(Message msg) 
             {
-            	Button confirmButton=(Button) Measure.this.findViewById(R.id.ButtonStart);
-        		if(progress<100)
-        			confirmButton.setEnabled(false);
-        		else
-        			confirmButton.setEnabled(true);
+            	ImageButton startButton=(ImageButton) Measure.this.findViewById(R.id.startButton);
+            	ImageButton stopButton=(ImageButton) Measure.this.findViewById(R.id.stopButton);
+        		if(progress<100){
+        			startButton.setEnabled(false);
+        			stopButton.setEnabled(false);
+        		}else{
+        			if(processing.get()){
+        				startButton.setEnabled(true);
+        				stopButton.setEnabled(false);
+        			}
+        			else{
+        				stopButton.setEnabled(true);
+        				startButton.setEnabled(false);
+        			}
+        		}
                 
             }
         };
@@ -235,6 +245,9 @@ public class Measure extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_measure);
+		
+		ImageButton stop=(ImageButton) findViewById(R.id.stopButton);
+		stop.setEnabled(false);
 		
 		
 		canvas=new ECGCanvas();
@@ -315,6 +328,7 @@ public class Measure extends Activity {
 
 		@Override
 		public void onPreviewFrame(byte[] data, Camera cam) {
+
 
 
 			if(!STARTING_NOISE){
@@ -472,13 +486,13 @@ public class Measure extends Activity {
 	}
 	
 	private void myStop(){
+		
+		ImageButton startButton=(ImageButton) Measure.this.findViewById(R.id.startButton);
+		ImageButton stopButton=(ImageButton) Measure.this.findViewById(R.id.stopButton);
+		startButton.setEnabled(true);
+    	stopButton.setEnabled(false);
+    	
 		ImageView still = (ImageView) Measure.this.findViewById(R.id.progressBarStill);
-		//FOR DEBUG
-		/*long alaki_time2=System.currentTimeMillis();
-		long zaman=(alaki_time2-alaki_time)/1000;
-		System.out.println("zaman: "+zaman);
-		System.out.println("tedade frame ha: "+alaki_frame);
-		System.out.println("fps: "+alaki_frame/zaman);*/
 		
 		still.setVisibility(View.VISIBLE);
 		progressBar.setVisibility(View.INVISIBLE);
@@ -487,6 +501,7 @@ public class Measure extends Activity {
 		p.setFlashMode(Parameters.FLASH_MODE_OFF);
 		camera.setParameters(p);
 		processing.set(true);
+		
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		TextView myMsg = new TextView(this);
 		myMsg.setText("TODO:\n\nDecision tree here. is the person:\n\n*Healthy?\n*Needs exercise?\n*At risk?\n*etc.");
@@ -494,13 +509,13 @@ public class Measure extends Activity {
 		myMsg.setPadding(10, 0, 0, 5);
 		myMsg.setGravity(Gravity.LEFT);
 		builder.setView(myMsg);
-		builder.setPositiveButton("OK",
-				new DialogInterface.OnClickListener() {
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dlg,
 					int sumthin) {
-				Button confirmButton = (Button) Measure.this.findViewById(R.id.ButtonStart);
-				confirmButton.setText("Start");
-				//processing.set(false);
+				ImageButton start = (ImageButton) Measure.this.findViewById(R.id.startButton);
+				ImageButton stop = (ImageButton) Measure.this.findViewById(R.id.stopButton);
+				start.setEnabled(true);
+				stop.setEnabled(false);
 			}
 		});
 
@@ -509,16 +524,17 @@ public class Measure extends Activity {
 	}
 	
 	private void myStart(){
+		
+		ImageButton stopButton=(ImageButton) Measure.this.findViewById(R.id.stopButton);
+    	stopButton.setEnabled(false);
+    	
+    	
 		ImageView still = (ImageView) Measure.this.findViewById(R.id.progressBarStill);
-		//FOR DEBUG
-		/*alaki_time=System.currentTimeMillis();*/
 		
 		still.setVisibility(View.INVISIBLE);
 		progressBar.setVisibility(View.VISIBLE);
 		
 		new Thread(progressRunnable).start();
-		Button confirmButton = (Button) Measure.this.findViewById(R.id.ButtonStart);
-		confirmButton.setText("Stop");
 		
 		resetSignal();
 		STARTING_NOISE=true;
@@ -526,17 +542,47 @@ public class Measure extends Activity {
 		p.setFlashMode(Parameters.FLASH_MODE_TORCH);
 		camera.setParameters(p);
 		processing.set(false);
+	}
+	
+	private void myReset(){
+		ImageButton startButton=(ImageButton) Measure.this.findViewById(R.id.startButton);
+		ImageButton stopButton=(ImageButton) Measure.this.findViewById(R.id.stopButton);
+		startButton.setEnabled(true);
+    	stopButton.setEnabled(false);
+    	
+		ImageView still = (ImageView) Measure.this.findViewById(R.id.progressBarStill);
 		
+		still.setVisibility(View.VISIBLE);
+		progressBar.setVisibility(View.INVISIBLE);
+		
+		final Parameters p = camera.getParameters();
+		p.setFlashMode(Parameters.FLASH_MODE_OFF);
+		camera.setParameters(p);
+		processing.set(true);
+		
+		resetSignal();
+		
+		STARTING_NOISE=true;
+		
+		TextView tv=(TextView) findViewById(R.id.progressText);
+		tv.setText("Press Start");
+		
+		canvas=new ECGCanvas();
+	    drawingGraph = (LinearLayout) findViewById(R.id.testView); 
+	    drawingGraph.setBackgroundDrawable(canvas.drawECG());  
 	}
 
-	public void interpretMessage(View v){
-		///////		DONE
-		if(!processing.get()){
-			myStop();
-			//////		START
-		}else{
-			myStart();
-		}
+	public void startClicked(View v){
+		myStart();
+	}
+	
+	public void stopClicked(View v){
+		myStop();
+
+	}
+	
+	public void resetClicked(View v){
+		myReset(); 
 	}
 	
 	
