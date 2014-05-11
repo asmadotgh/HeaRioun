@@ -83,6 +83,7 @@ public class Measure extends Activity {
 		start_time=System.currentTimeMillis();
 		
 		//reset graphical components
+		beating=false;
 		canvas=new ECGCanvas();
 		
 	}
@@ -204,7 +205,7 @@ public class Measure extends Activity {
 	private boolean beating=false;
 	//private final static long BEAT_DELAY=15000;
 
-	private final static int NEEDLE_ARRAY_SIZE=9;
+	private final static int NEEDLE_ARRAY_SIZE=13;
 	private static int needleDX[]=new int[NEEDLE_ARRAY_SIZE];
 	private Matrix needleMatrix;
 	private int needleIndex=0;
@@ -215,14 +216,19 @@ public class Measure extends Activity {
 	private void initializeBeat(){
 		int index=0;
 		needleDX[index++]=0;
-		needleDX[index++]=8;
-		needleDX[index++]=0;
-		needleDX[index++]=-16;
-		needleDX[index++]=-26;
-		needleDX[index++]=-16;
-		needleDX[index++]=0;
+		needleDX[index++]=-2;
+		needleDX[index++]=-2;
+		needleDX[index++]=-0;
+		needleDX[index++]=-0;
+		needleDX[index++]=5;
+		needleDX[index++]=-25;
 		needleDX[index++]=4;
 		needleDX[index++]=0;
+		needleDX[index++]=0;
+		needleDX[index++]=-5;
+		needleDX[index++]=-5;
+		needleDX[index++]=0;
+		
 		//System.out.println("index: "+index);
 	}
 	@Override
@@ -309,12 +315,11 @@ public class Measure extends Activity {
 
 		@Override
 		public void onPreviewFrame(byte[] data, Camera cam) {
-		
-			//draw flat line if not beating
-			if (!beating){
-				BitmapDrawable tmp=canvas.flat();
-				drawingGraph.setBackground(tmp);
-			}
+
+
+			canvas.isBeating=beating;
+			BitmapDrawable tmp=canvas.drawECG();
+			drawingGraph.setBackground(tmp);
 			
 			if (data == null) throw new NullPointerException();
 			Camera.Size size = cam.getParameters().getPreviewSize();
@@ -418,12 +423,6 @@ public class Measure extends Activity {
 		//if in the initialization mode, no need to draw
 		if(STARTING_NOISE)
 			return;
-		
-		//update animated drawing of beating graph
-		canvas.isDrawing=processing.get();
-		BitmapDrawable tmp=canvas.tick();
-		drawingGraph.setBackground(tmp);
-
 		direction=-1;
 		beat();
 		MediaPlayer sound = MediaPlayer.create(this, R.raw.beat); 
@@ -446,7 +445,11 @@ public class Measure extends Activity {
 		tmp.invalidate();
 	}
 	private void drawNeelde(){
-		ECGLine.lineTo(0, needleDX[needleIndex]);
+
+		if(beating && needleIndex>=2){
+				direction=0;
+				beat();
+		}
 		ImageView needle=(ImageView) findViewById(R.id.imageViewNeedle);
 		needleMatrix.setTranslate(0, needleDX[needleIndex]);
 		needle.setImageMatrix(needleMatrix);
