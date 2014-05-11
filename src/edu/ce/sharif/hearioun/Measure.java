@@ -317,9 +317,11 @@ public class Measure extends Activity {
 		public void onPreviewFrame(byte[] data, Camera cam) {
 
 
-			canvas.isBeating=beating;
-			BitmapDrawable tmp=canvas.drawECG();
-			drawingGraph.setBackground(tmp);
+			if(!STARTING_NOISE){
+				canvas.isBeating=beating;
+				BitmapDrawable tmp=canvas.drawECG();
+				drawingGraph.setBackground(tmp);
+			}
 			
 			if (data == null) throw new NullPointerException();
 			Camera.Size size = cam.getParameters().getPreviewSize();

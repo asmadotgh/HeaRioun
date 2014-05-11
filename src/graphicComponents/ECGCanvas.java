@@ -93,6 +93,7 @@ public class ECGCanvas{
 			path.moveTo(lastX, OFFSET);
 			lastX+=SPEED;
 			path.lineTo(lastX, OFFSET);
+			canvas.drawPath(path, paint);
 		}
 		return new BitmapDrawable(bg);
 	}
