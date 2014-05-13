@@ -47,7 +47,7 @@
 </RelativeLayout>
 
     
-    <include android:id="@+id/graph" layout="@layout/touch_zoom_example" /> 				
+    <include android:id="@+id/graph" layout="@layout/history_graph" /> 				
     <RelativeLayout
         android:id="@+id/zoomPanel"
         android:layout_width="fill_parent"

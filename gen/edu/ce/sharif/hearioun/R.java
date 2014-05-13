@@ -114,7 +114,7 @@ public final class R {
         public static final int TextViewBRAmount=0x7f0a0017;
         public static final int TextViewHR=0x7f0a0014;
         public static final int TextViewHRAmount=0x7f0a0015;
-        public static final int action_settings=0x7f0a002b;
+        public static final int action_settings=0x7f0a002c;
         public static final int aprHistoryPlot=0x7f0a0029;
         public static final int autoStopCheckBox=0x7f0a001b;
         public static final int buttonProfileConfirm=0x7f0a0028;
@@ -138,9 +138,9 @@ public final class R {
         public static final int radioFemale=0x7f0a0027;
         public static final int radioGender=0x7f0a0021;
         public static final int radioMale=0x7f0a0026;
-        public static final int resetButton=0x7f0a001a;
+        public static final int resetButton=0x7f0a0018;
         public static final int startButton=0x7f0a0019;
-        public static final int stopButton=0x7f0a0018;
+        public static final int stopButton=0x7f0a001a;
         public static final int testView=0x7f0a000f;
         public static final int textView1=0x7f0a0000;
         public static final int textView2=0x7f0a0002;
@@ -151,6 +151,7 @@ public final class R {
         public static final int textViewName=0x7f0a001c;
         public static final int textViewWeight=0x7f0a0022;
         public static final int zoomControls1=0x7f0a0009;
+        public static final int zoomOutButton=0x7f0a002b;
         public static final int zoomPanel=0x7f0a0008;
     }
     public static final class layout {
@@ -160,8 +161,8 @@ public final class R {
         public static final int activity_measure=0x7f030003;
         public static final int activity_profile=0x7f030004;
         public static final int ecg_drawer=0x7f030005;
-        public static final int progress_circle=0x7f030006;
-        public static final int touch_zoom_example=0x7f030007;
+        public static final int history_graph=0x7f030006;
+        public static final int progress_circle=0x7f030007;
     }
     public static final class menu {
         public static final int help=0x7f090000;

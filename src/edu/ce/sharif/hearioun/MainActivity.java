@@ -6,13 +6,15 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+import edu.ce.sharif.hearioun.database.PrefManager;
 
 public class MainActivity extends TabActivity {
-
+ 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main);		
 		
 		Resources ressources = getResources(); 
 		TabHost tabHost = getTabHost(); 
@@ -53,6 +55,12 @@ public class MainActivity extends TabActivity {
 		
 		//set Windows tab as default (zero based)
 		tabHost.setCurrentTab(0);
+		
+
+				
+
+		
+		
 	}
 
 /*

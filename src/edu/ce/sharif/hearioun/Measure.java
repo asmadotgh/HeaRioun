@@ -26,11 +26,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import edu.ce.sharif.hearioun.database.PrefManager;
 import edu.ce.sharif.hearioun.signalProcessing.ImageProcessing;
 import edu.ce.sharif.hearioun.signalProcessing.SignalProcess;
 import graphicComponents.ECGCanvas;
 
 public class Measure extends Activity {
+	
+	private PrefManager prefManager=null;
 
 	
 	SignalProcess signalProcess=null;
@@ -245,7 +248,12 @@ public class Measure extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_measure);
-		
+
+
+		//reading from DB
+		prefManager=new PrefManager(this);
+		prefManager.loadSavedPreferences();
+
 		ImageButton stop=(ImageButton) findViewById(R.id.stopButton);
 		stop.setEnabled(false);
 		
@@ -516,6 +524,13 @@ public class Measure extends Activity {
 				ImageButton stop = (ImageButton) Measure.this.findViewById(R.id.stopButton);
 				start.setEnabled(true);
 				stop.setEnabled(false);
+				
+				
+				prefManager=new PrefManager(Measure.this);
+				prefManager.loadSavedPreferences();
+				
+				prefManager.savePreferencesIntArray("HR", HR);
+				prefManager.savePreferencesIntArray("BR", BR);
 			}
 		});
 

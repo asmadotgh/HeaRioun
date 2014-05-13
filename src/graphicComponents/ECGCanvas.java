@@ -12,7 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 public class ECGCanvas{
 
 	static int BEAT[];
-	final static int SPEED=7;
+	final static int SPEED=-7;
 	
 	final static int OFFSET=25;
 	int lastX;
@@ -74,7 +74,7 @@ public class ECGCanvas{
 		path_ind=0;
 		isBeating=false;
 		
-		lastX=300;
+		lastX=0;
 
 		startTime = System.currentTimeMillis();
 	}

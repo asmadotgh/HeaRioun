@@ -12,6 +12,6 @@
     <string name="Weight">Weight (Kg)</string>
     <string name="Height">Height (cm)</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="help">Please place the tip of your index finger on the camera lens. Just hold it gently and don\'t press too hard. Hold it steady for a few seconds. Your HR and HRV is measured then.</string>
+    <string name="help">Please place the tip of your index finger on the camera lens. Just hold it gently and don\'t press too hard. Hold it steady for a few seconds. Then you will see your Heart Rate(HR) and Breathing Rate(BR) will be shown in a few seconds.</string>
 
 </resources>

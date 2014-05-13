@@ -154,17 +154,18 @@ public class SignalProcess {
 		DoubleFFT_1D fft = new DoubleFFT_1D(y.length);
 		fft.complexForward(fft_y);
 
-		System.out.println("Red amount");
+		//FOR DEBUG
+		/*System.out.println("Red amount");
 		for(int j=0;j<y.length; j++)
 			System.out.println(y[j]);
-		//FOR DEBUG
+
 		System.out.println();
 		System.out.println("FFT: ");
 		for(int j=0;j<y.length;j++){
 			gain[j]=Math.sqrt(fft_y[2*j]*fft_y[2*j]+fft_y[2*j+1]*fft_y[2*j+1]);
 			System.out.println(gain[j]+" ");
 		}
-		System.out.println();
+		System.out.println();*/
 
 
 
@@ -244,9 +245,9 @@ public class SignalProcess {
 		}
 
 		//FOR DEBIG
-		System.out.println("peaks: ");
+		/*System.out.println("peaks: ");
 		for(int i=0;i<debug.length;i++)
-			System.out.println(debug[i]);
+			System.out.println(debug[i]);*/
 
 		return tmp.size();
 	}
@@ -282,10 +283,10 @@ public class SignalProcess {
 		//y = hann(y);
 
 		//FOR DEBUG
-		System.out.println("Red amount");
+		/*System.out.println("Red amount");
 		for(int j=0;j<y.length; j++)
 			System.out.println(y[j]);
-		System.out.println();
+		System.out.println();*/
 
 		int noPeaks=countPeaks2(y);
 		//System.out.println("noPeaks: "+noPeaks+" window seconds: "+WINDOW_SECONDS);
@@ -302,10 +303,10 @@ public class SignalProcess {
 		myAverageFilter(y_BR, y_BR, AVERAGING_LENGTH);
 
 		//FOR DEBUG
-		System.out.println("Smoothed for BR measurement:");
+		/*System.out.println("Smoothed for BR measurement:");
 		for(int j=0;j<y_BR.length; j++)
 			System.out.println(y_BR[j]);
-		System.out.println();
+		System.out.println();*/
 
 		int noPeaks=countPeaks2(y_BR);
 		if(noPeaks==0)

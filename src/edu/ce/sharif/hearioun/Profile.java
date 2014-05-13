@@ -1,24 +1,28 @@
 package edu.ce.sharif.hearioun;
 
+import edu.ce.sharif.hearioun.database.PrefManager;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Profile extends Activity {
 	
-	/*
-	public Profile(){
-		genderSw=(Switch) findViewById(R.id.SwitchGender);
-		genderSw.setTextOn("female");
-		genderSw.setTextOff("male");
-	}*/
+	private PrefManager prefManager=null;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
+		
+		//reading from DB
+		prefManager=new PrefManager(this);
+		prefManager.loadSavedPreferences();
+		prefManager.updateProfile();
 	}
 
 	@Override
@@ -30,22 +34,39 @@ public class Profile extends Activity {
 	
 	public void onConfirm(View v){
 		
+		//Read DB first
+		prefManager=new PrefManager(this);
+		prefManager.loadSavedPreferences();
+		
+		
 		Toast.makeText(this,"Profile updated.",Toast.LENGTH_SHORT).show();
-		/*SharedPreferences prefs = this.getSharedPreferences("edu.ce.sharif.hearioun", Context.MODE_PRIVATE);
 		
-		String dateTimeKey = "com.example.app.datetime";
-
-		// use a default value using new Date()
-		long l = prefs.getLong(dateTimeKey, new Date().getTime()); 
+		TextView name_tv=(TextView) findViewById(R.id.editTextName);
+		TextView age_tv=(TextView) findViewById(R.id.editTextAge);
+		TextView weight_tv=(TextView) findViewById(R.id.editTextWeight);
+		TextView height_tv=(TextView) findViewById(R.id.editTextHeight);
+		boolean gender=((RadioButton) findViewById(R.id.radioMale)).isChecked();
 		
-		Date dt = getSomeDate();
-		prefs.edit().putLong(dateTimeKey, dt.getTime()).commit();
+		prefManager.savePreferencesString("name", name_tv.getText().toString());
+		try{
+			int age=Integer.parseInt(age_tv.getText().toString());
+			prefManager.savePreferencesInt("age", age);
+		}catch(Exception e){
+		}
 		
+		try{
+			int weight=Integer.parseInt(weight_tv.getText().toString());
+			prefManager.savePreferencesInt("weight", weight);
+		}catch(Exception e){
+		}
 		
-		Button confirmBtn = (Button) findViewById(R.id.buttonProfileConfirm);
-		Intent measure = new Intent(this, ECGDrawer.class);
-		measure.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		startActivity(measure);*/
+		try{
+			int height=Integer.parseInt(height_tv.getText().toString());
+			prefManager.savePreferencesInt("height", height);
+		}catch(Exception e){
+		}
+		
+		prefManager.savePreferencesBool("gender", gender);
 		
 	}
 

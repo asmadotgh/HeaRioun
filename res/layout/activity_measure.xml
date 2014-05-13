@@ -143,14 +143,14 @@
     
 
     <ImageButton
-        android:id="@+id/stopButton"
+        android:id="@+id/resetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageViewBeat"
         android:layout_marginTop="170dp"
-        android:layout_marginLeft="20dp"
-        android:onClick="stopClicked"
-        android:src="@drawable/stop" />
+        android:layout_marginLeft="40dp"
+        android:onClick="resetClicked"
+        android:src="@drawable/reset" />
     
     <ImageButton
         android:id="@+id/startButton"
@@ -158,21 +158,21 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageViewBeat"
         android:layout_marginTop="160dp"
-        android:layout_marginLeft="35dp"
-        android:layout_toRightOf="@+id/stopButton"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/resetButton"
         android:onClick="startClicked"
         android:src="@drawable/start" />
     
     <ImageButton
-        android:id="@+id/resetButton"
+        android:id="@+id/stopButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageViewBeat"
         android:layout_toRightOf="@+id/startButton"
-        android:layout_marginLeft="35dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="170dp"
-        android:onClick="resetClicked"
-        android:src="@drawable/reset" />
+        android:onClick="stopClicked"
+        android:src="@drawable/stop" />
     
     
 
