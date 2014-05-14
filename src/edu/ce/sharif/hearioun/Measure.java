@@ -256,7 +256,6 @@ public class Measure extends Activity {
 		needleDX[index++]=-5;
 		needleDX[index++]=0;
 		
-		//System.out.println("index: "+index);
 	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -358,7 +357,7 @@ public class Measure extends Activity {
 				BitmapDrawable tmp=canvas.drawECG();
 				drawingGraph.setBackground(tmp);
 				
-				breathingCanvas=new BreathingCanvas(signalProcess.makeBreathingSignal(SIGNAL));
+				breathingCanvas.signal=signalProcess.makeBreathingSignal(SIGNAL);
 				breathingCanvas.isDrawing=!processing.get();
 				BitmapDrawable tmp2=breathingCanvas.drawBreathing();
 				breathingGraph.setBackground(tmp2);
@@ -438,22 +437,16 @@ public class Measure extends Activity {
 	};
 
 	private void beat_on(){
-		//System.out.println("tu beat on");
 		//if in the initialization mode, no need to draw
 		if(STARTING_NOISE)
 			return;
-		//System.out.println("starting noise nabud");
 		if(needleIndex!=0)
 			return;
-		//System.out.println("index e needle 0 nabud");
 		direction=-1;
-		//System.out.println("before beat");
 		beat();
-		//System.out.println("after beat");
 		beatingSound = MediaPlayer.create(this, R.raw.beat);
 		beatingSound.setVolume(volume, volume);
 		beatingSound.start(); 
-		//System.out.println("after start sound!!!");
 		//lastBeatTime=System.currentTimeMillis();
 		beating=true;
 
