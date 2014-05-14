@@ -87,6 +87,8 @@ public class PrefManager {
 		editor.remove("BR");
 		editor.putInt("BR", 0);
 		
+		editor.commit();
+		
 		hist.updateHistory("HR", HR);
 		hist.updateHistory("BR", BR);
 		
@@ -111,6 +113,7 @@ public class PrefManager {
 	    for(int i=0;i<BR_size;i++)
 	        BR.add(pref.getInt("BRStatus_" + i, 0));
 	    
+	    
 	}
 	
 
@@ -134,14 +137,12 @@ public class PrefManager {
 	}
 	
 	public void savePreferencesIntArray(String key, int value){
-		System.out.println("ghabl az amal: "+pref.getInt(key, 0));
 		int array_size = pref.getInt(key, 0);
 		editor.putInt(key+"Status_" + array_size,value);
 		array_size++;
 		editor.remove(key);
 		editor.putInt(key, array_size);
 		editor.commit();
-		System.out.println("bad az amal: "+pref.getInt(key, 0));
 	}
 
 

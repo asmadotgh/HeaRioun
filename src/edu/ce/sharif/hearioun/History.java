@@ -31,24 +31,32 @@ public class History extends Activity implements OnTouchListener{
 	private static SimpleXYSeries[] series = null;
 	private PointF minXY=new PointF(0,0);
 	private PointF maxXY=new PointF(0,0);
+	
+	private final static float	DEFAULT_MIN_X=0, DEFAULT_MAX_X=7, DEFAULT_MIN_Y=0, DEFAULT_MAX_Y=225;
 
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		System.out.println("resume shooooooooooooood");
+		prefManager=new PrefManager(this);
+		prefManager.loadSavedPreferences();
 		prefManager.updateHistory();
 	}
 
 	public void updateView(){
-		if(series[0].size()==0)
+		if(series[0].size()==0){
+			mySimpleXYPlot.setDomainBoundaries(DEFAULT_MIN_X, DEFAULT_MAX_X, BoundaryMode.FIXED);
+			mySimpleXYPlot.setRangeBoundaries(DEFAULT_MIN_Y, DEFAULT_MAX_Y, BoundaryMode.FIXED);
+			mySimpleXYPlot.redraw();
 			return;
+		}
 		minXY.x = series[0].getX(0).floatValue();
-		minXY.y=0F;
-		maxXY .x=series[0].getX(series[0].size() - 1).floatValue();
-		maxXY.y=225F;
+		minXY.y=DEFAULT_MIN_Y;
+		maxXY.x=series[0].getX(series[0].size() - 1).floatValue();
+		/*if(maxXY.x<DEFAULT_MAX_X)
+			maxXY.x=DEFAULT_MAX_X;*/
+		maxXY.y=DEFAULT_MAX_Y;
 
-		System.out.println("min o max e mehvar? "+minXY.x+" "+maxXY.x);
 		mySimpleXYPlot.setDomainBoundaries(minXY.x, maxXY.x, BoundaryMode.FIXED);
 		mySimpleXYPlot.setRangeBoundaries(minXY.y, maxXY.y, BoundaryMode.FIXED);
 		//mySimpleXYPlot.calculateMinMaxVals();
@@ -121,18 +129,23 @@ public class History extends Activity implements OnTouchListener{
 	public void updateHistory(String name, ArrayList<Integer> val) {
 		prefManager=new PrefManager(this);
 		prefManager.loadSavedPreferences();
-		System.out.println("tu update: "+name+" chanta? "+val.size());
 		if(name.equals("BR")){
-			series[0]= new SimpleXYSeries(val,SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "BR");
+			int num=series[0].size();
+			for(int i=0;i<num;i++)
+				series[0].removeLast();
+			for(int i=0;i<val.size();i++)
+				series[0].addLast(i,val.get(i));
 		}
 		else if(name.equals("HR")){
-			series[1]= new SimpleXYSeries(val,SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "HR");
-			for(int i=0;i<series[1].size();i++)
-				System.out.println(series[1].getY(i));
+			int num=series[1].size();
+			for(int i=0;i<num;i++)
+				series[1].removeLast();
+			for(int i=0;i<val.size();i++)
+				series[1].addLast(i,val.get(i));
 		}
-
-		System.out.println(series[0].size()+" "+series[1].size());
+		
 		updateView();
+
 	}
 
 
@@ -148,6 +161,8 @@ public class History extends Activity implements OnTouchListener{
 
 	@Override
 	public boolean onTouch(View arg0, MotionEvent event) {
+		if(series[0].size()<=2)
+			return true;
 		switch (event.getAction() & MotionEvent.ACTION_MASK) {
 		case MotionEvent.ACTION_DOWN: // Start gesture
 			firstFinger = new PointF(event.getX(), event.getY());
@@ -188,6 +203,8 @@ public class History extends Activity implements OnTouchListener{
 	}
 
 	private void zoom(float scale) {
+		if(series[0].size()<=2)
+			return;
 		float domainSpan = maxXY.x - minXY.x;
 		float domainMidPoint = maxXY.x - domainSpan / 2.0f;
 		float offset = domainSpan * scale / 2.0f;
@@ -202,6 +219,8 @@ public class History extends Activity implements OnTouchListener{
 	}
 
 	private void scroll(float pan) {
+		if(series[0].size()<=2)
+			return;
 		float domainSpan = maxXY.x - minXY.x;
 		float step = domainSpan / mySimpleXYPlot.getWidth();
 		float offset = pan * step;
@@ -211,6 +230,8 @@ public class History extends Activity implements OnTouchListener{
 	}
 
 	private void clampToDomainBounds(float domainSpan) {
+		if(series[0].size()<=2)
+			return;
 		float leftBoundary = series[0].getX(0).floatValue();
 		float rightBoundary = series[1].getX(series[1].size() - 1).floatValue();
 		// enforce left scroll boundary:

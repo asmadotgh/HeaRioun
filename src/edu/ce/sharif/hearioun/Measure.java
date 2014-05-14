@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
@@ -29,12 +30,19 @@ import android.widget.TextView;
 import edu.ce.sharif.hearioun.database.PrefManager;
 import edu.ce.sharif.hearioun.signalProcessing.ImageProcessing;
 import edu.ce.sharif.hearioun.signalProcessing.SignalProcess;
+import graphicComponents.BreathingCanvas;
 import graphicComponents.ECGCanvas;
 
 public class Measure extends Activity {
 	
 	private PrefManager prefManager=null;
 
+	//for beating sound
+	private MediaPlayer beatingSound;
+	private float MAX_VOLUME=7;
+	private float volume_progress=4;
+	private float volume = (float) (1 - (Math.log(MAX_VOLUME - volume_progress) / Math.log(MAX_VOLUME)));
+	
 	
 	SignalProcess signalProcess=null;
 
@@ -61,6 +69,11 @@ public class Measure extends Activity {
 	
 	/**********			END drawing beating graph			***********/
 
+    /**********			START drawing breathing graph			***********/
+	BreathingCanvas breathingCanvas;
+    LinearLayout breathingGraph;
+	
+	/**********			END drawing breathing graph			***********/
 
 	/**********			START acquiring the signal			***********/
 	private boolean STARTING_NOISE=true;
@@ -88,6 +101,7 @@ public class Measure extends Activity {
 		//reset graphical components
 		beating=false;
 		canvas=new ECGCanvas();
+		breathingCanvas=new BreathingCanvas(signalProcess.makeBreathingSignal(SIGNAL));
 		
 	}
 	public void addToSignal(int inp){
@@ -254,13 +268,14 @@ public class Measure extends Activity {
 		prefManager=new PrefManager(this);
 		prefManager.loadSavedPreferences();
 
+		//initializing beating volume to half
+		beatingSound = MediaPlayer.create(this, R.raw.beat); 
+		beatingSound.setVolume(volume, volume);
+		
 		ImageButton stop=(ImageButton) findViewById(R.id.stopButton);
 		stop.setEnabled(false);
 		
-		
-		canvas=new ECGCanvas();
-	    drawingGraph = (LinearLayout) findViewById(R.id.testView); 
-	    drawingGraph.setBackgroundDrawable(canvas.drawECG());    
+	
 
 		//initializing progress bar
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -279,26 +294,25 @@ public class Measure extends Activity {
 		ImageView ECGPainter=(ImageView) findViewById(R.id.ECGLine);
 
 		beatMatrix=new Matrix();
-		//beatMatrix.setTranslate(0, 0);
-		/*ECGPainter.setImageMatrix(needleMatrix);
-		ECGPainter.invalidate();*/
 
-
-		//for(int i=0;i<100;i++){
-		//BitmapDrawable bitmapDrawable  = new BitmapDrawable(getResources(),BitmapFactory.decodeResource(getResources(), R.drawable.paper_graph));
-
-		//}
 		BitmapDrawable bitmapDrawable  = new BitmapDrawable(getResources(),BitmapFactory.decodeResource(getResources(), R.drawable.paper_all0));
 		ECGPainter.setImageDrawable(bitmapDrawable);
 		paperIndex++;
 
 		ECGPainter.invalidate();
 
-		//HRPainter ECGPainter=(HRPainter) findViewById(R.id.ECGLine);
+		
+		//initializing graphical components
+		canvas=new ECGCanvas();
+	    drawingGraph = (LinearLayout) findViewById(R.id.ECGView); 
+	    drawingGraph.setBackgroundDrawable(canvas.drawECG());
+	    
+	    
+	    breathingCanvas=new BreathingCanvas(signalProcess.makeBreathingSignal(SIGNAL));
+	    breathingGraph = (LinearLayout) findViewById(R.id.breathingView);
+	    breathingGraph.setBackgroundDrawable(breathingCanvas.drawBreathing());
+	    
 
-
-
-		//beatMatrix.set(getResources().getDrawable(R.drawable.beat));
 	}
 
 	@Override
@@ -343,9 +357,11 @@ public class Measure extends Activity {
 				canvas.isBeating=beating;
 				BitmapDrawable tmp=canvas.drawECG();
 				drawingGraph.setBackground(tmp);
-				/*LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)drawingGraph.getLayoutParams();
-				params.setMargins(100,0,0,0);
-				drawingGraph.setLayoutParams(params);*/
+				
+				breathingCanvas=new BreathingCanvas(signalProcess.makeBreathingSignal(SIGNAL));
+				breathingCanvas.isDrawing=!processing.get();
+				BitmapDrawable tmp2=breathingCanvas.drawBreathing();
+				breathingGraph.setBackground(tmp2);
 			}
 			
 			if (data == null) throw new NullPointerException();
@@ -422,18 +438,44 @@ public class Measure extends Activity {
 	};
 
 	private void beat_on(){
+		//System.out.println("tu beat on");
 		//if in the initialization mode, no need to draw
 		if(STARTING_NOISE)
 			return;
+		//System.out.println("starting noise nabud");
 		if(needleIndex!=0)
 			return;
+		//System.out.println("index e needle 0 nabud");
 		direction=-1;
+		//System.out.println("before beat");
 		beat();
-		MediaPlayer sound = MediaPlayer.create(this, R.raw.beat); 
-		sound.start();  
+		//System.out.println("after beat");
+		beatingSound = MediaPlayer.create(this, R.raw.beat);
+		beatingSound.setVolume(volume, volume);
+		beatingSound.start(); 
+		//System.out.println("after start sound!!!");
 		//lastBeatTime=System.currentTimeMillis();
 		beating=true;
 
+	}
+	
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
+			if(volume_progress<MAX_VOLUME){
+				volume_progress++;
+				volume = (float) (1 - (Math.log(MAX_VOLUME - volume_progress) / Math.log(MAX_VOLUME)));
+				return true;
+			}
+		}
+		if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+			if(volume_progress>0){
+				volume_progress--;
+				volume = (float) (1 - (Math.log(MAX_VOLUME - volume_progress) / Math.log(MAX_VOLUME)));
+				return true;
+			}
+		}
+		return super.onKeyUp(keyCode, event);
 	}
 	private void beat_off(){
 		
@@ -583,8 +625,12 @@ public class Measure extends Activity {
 		tv.setText("Press Start");
 		
 		canvas=new ECGCanvas();
-	    drawingGraph = (LinearLayout) findViewById(R.id.testView); 
-	    drawingGraph.setBackgroundDrawable(canvas.drawECG());  
+	    drawingGraph = (LinearLayout) findViewById(R.id.ECGView); 
+	    drawingGraph.setBackgroundDrawable(canvas.drawECG());
+	    
+	    breathingCanvas=new BreathingCanvas(signalProcess.makeBreathingSignal(SIGNAL));
+	    breathingGraph = (LinearLayout) findViewById(R.id.breathingView); 
+	    breathingGraph.setBackgroundDrawable(breathingCanvas.drawBreathing());  
 	}
 
 	public void startClicked(View v){

@@ -39,12 +39,36 @@
     </FrameLayout>
     
     <LinearLayout 
+        android:id="@+id/ECGView"
         android:orientation="horizontal"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="65dp"
         android:layout_width="250dp"
         android:layout_height="80dp"
-        android:id="@+id/testView"
+        android:background="@color/cyan"
+        >
+        
+    </LinearLayout>
+    
+            <LinearLayout 
+        android:id="@+id/chert"
+        android:orientation="horizontal"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="0dp"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        >
+        
+    </LinearLayout>
+    
+        <LinearLayout 
+        android:id="@+id/breathingView"
+        android:orientation="horizontal"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="65dp"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:background="@color/cyan"
         >
         
@@ -57,7 +81,7 @@
         android:scaleType="matrix"
         android:layout_below="@+id/ECG" 
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="105dp"
         android:src="@drawable/beat" />
     
 
@@ -67,7 +91,7 @@
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/imageViewBeat"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/progress_still"
 		/>
         
@@ -78,7 +102,7 @@
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/imageViewBeat"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:visibility="invisible"
 />
         
@@ -101,7 +125,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ECG"
         android:layout_alignLeft="@+id/ECG"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="105dp"
         android:layout_marginLeft="24dp"
         android:textSize="24sp"
         android:typeface="serif"
@@ -124,7 +148,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ECG"
         android:layout_alignRight="@+id/ECG"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="105dp"
         android:layout_marginRight="36dp"
         android:textSize="24sp"
         android:typeface="serif"
@@ -147,7 +171,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageViewBeat"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="120dp"
         android:layout_marginLeft="40dp"
         android:onClick="resetClicked"
         android:src="@drawable/reset" />
@@ -157,7 +181,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageViewBeat"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="110dp"
         android:layout_marginLeft="15dp"
         android:layout_toRightOf="@+id/resetButton"
         android:onClick="startClicked"
@@ -170,7 +194,7 @@
         android:layout_below="@+id/imageViewBeat"
         android:layout_toRightOf="@+id/startButton"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="120dp"
         android:onClick="stopClicked"
         android:src="@drawable/stop" />
     

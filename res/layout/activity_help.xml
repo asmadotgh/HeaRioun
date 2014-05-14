@@ -31,14 +31,5 @@
         android:layout_marginTop="26dp"
         android:src="@drawable/help_info" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/imageView1"
-        android:layout_marginTop="5dp"
-        android:textSize="18dp"
-        android:text="TODO:\nInformation about HR intervals etc." />
     </RelativeLayout>
 </ScrollView>

@@ -27,8 +27,14 @@ public class SignalProcess {
 	//double fch;							// Max Valid frequency
 	double FILTER_STABILIZATION_TIME;	//(s) Filter startup transient
 	int FINE_TUNING_FREQ_INCREMENT;		//(bpm) Separation between test tones for smoothing
-
-	private void myAverageFilter(int [] inp, int [] out, int length){
+	
+	public static int [] makeBreathingSignal(int [] inp){
+		int [] res=new int [inp.length];
+		myAverageFilter(inp, res, AVERAGING_LENGTH);
+		myAverageFilter(res, res, AVERAGING_LENGTH);
+		return res;
+	}
+	private static void myAverageFilter(int [] inp, int [] out, int length){
 		int sum=0;
 		for(int i=0;i<inp.length;i++){
 			sum+=inp[i];
