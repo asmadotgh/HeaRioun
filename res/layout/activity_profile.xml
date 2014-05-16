@@ -12,9 +12,9 @@
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:text="@string/Name" />
 
@@ -24,9 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textViewName"
         android:layout_alignBottom="@+id/textViewName"
-        android:layout_alignRight="@+id/editTextWeight"
-        android:layout_marginLeft="30dp"
-        android:layout_toLeftOf="@+id/textViewName"
+        android:layout_alignLeft="@+id/editTextWeight"
+        android:layout_marginRight="30dp"
+        android:layout_toRightOf="@+id/textViewName"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -48,7 +48,7 @@
         android:id="@+id/textViewAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textViewName"
+        android:layout_alignLeft="@+id/textViewName"
         android:layout_below="@+id/textViewName"
         android:layout_marginTop="30dp"
         android:text="@string/Age" />
@@ -58,10 +58,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textViewAge"
-        android:layout_alignRight="@+id/editTextWeight"
+        android:layout_alignLeft="@+id/editTextWeight"
         android:layout_below="@+id/radioGender"
-        android:layout_marginLeft="30dp"
-        android:layout_toLeftOf="@+id/textViewAge"
+        android:layout_marginRight="30dp"
+        android:layout_toRightOf="@+id/textViewAge"
         android:ems="10"
         android:inputType="number" >
 
@@ -72,7 +72,7 @@
         android:id="@+id/textViewWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textViewAge"
+        android:layout_alignLeft="@+id/textViewAge"
         android:layout_below="@+id/textViewAge"
         android:layout_marginTop="30dp"
         android:text="@string/Weight" />
@@ -83,9 +83,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textViewWeight"
         android:layout_alignBottom="@+id/textViewWeight"
-        android:layout_marginRight="22dp"
-        android:layout_marginLeft="30dp"
-        android:layout_toLeftOf="@+id/textViewWeight"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="30dp"
+        android:layout_toRightOf="@+id/textViewWeight"
         android:ems="10"
         android:inputType="number" >
 
@@ -96,7 +96,7 @@
         android:id="@+id/textViewHeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textViewWeight"
+        android:layout_alignLeft="@+id/textViewWeight"
         android:layout_below="@+id/textViewWeight"
         android:layout_marginTop="30dp"
         android:text="@string/Height" />
@@ -107,9 +107,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textViewHeight"
         android:layout_alignBottom="@+id/textViewHeight"
-        android:layout_marginRight="22dp"
-        android:layout_marginLeft="30dp"
-        android:layout_toLeftOf="@+id/textViewHeight"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="30dp"
+        android:layout_toRightOf="@+id/textViewHeight"
         android:ems="10"
         android:inputType="number" >
 
@@ -120,7 +120,7 @@
         android:id="@+id/textViewGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textViewName"
+        android:layout_alignLeft="@+id/textViewName"
         android:layout_below="@+id/textViewHeight"
         android:layout_marginTop="30dp"
         android:text="@string/Gender" />
@@ -129,9 +129,9 @@
         android:id="@+id/radioGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editTextName"
+        android:layout_alignRight="@+id/editTextName"
         android:layout_below="@+id/editTextHeight"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:orientation="horizontal"
         android:paddingTop="15dp" >
 
@@ -155,8 +155,8 @@
         android:id="@+id/buttonProfileConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/editTextHeight"
-        android:layout_alignLeft="@+id/radioGender"
+        android:layout_alignLeft="@+id/editTextHeight"
+        android:layout_alignRight="@+id/radioGender"
         android:layout_below="@+id/radioGender"
         android:layout_marginTop="32dp"
         android:onClick="onConfirm"

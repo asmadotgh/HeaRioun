@@ -177,57 +177,29 @@ public final class R {
     }
     public static final class raw {
         public static final int beat=0x7f040000;
-        public static final int bnazanin=0x7f040001;
-        public static final int bnazaninb=0x7f040002;
     }
     public static final class string {
         public static final int Age=0x7f070002;
-        public static final int Age_en=0x7f070003;
-        public static final int BR=0x7f07001f;
-        public static final int BR_en=0x7f070020;
-        public static final int Gender=0x7f070004;
-        public static final int Gender_en=0x7f070005;
-        public static final int HR=0x7f07001d;
-        public static final int HR_en=0x7f07001e;
-        public static final int Height=0x7f07000a;
-        public static final int Height_en=0x7f07000b;
-        public static final int Name=0x7f070006;
-        public static final int Name_en=0x7f070007;
+        public static final int BR=0x7f07000e;
+        public static final int Gender=0x7f070006;
+        public static final int HR=0x7f07000d;
+        public static final int Height=0x7f070009;
+        public static final int Name=0x7f070007;
         public static final int Weight=0x7f070008;
-        public static final int Weigth_en=0x7f070009;
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;
-        public static final int autostop=0x7f070021;
-        public static final int autostop_en=0x7f070022;
-        public static final int female=0x7f07000e;
-        public static final int female_en=0x7f07000f;
-        public static final int help=0x7f070027;
-        public static final int help_en=0x7f070028;
-        public static final int initializing=0x7f070029;
-        public static final int initializing_en=0x7f07002a;
-        public static final int male=0x7f07000c;
-        public static final int male_en=0x7f07000d;
-        public static final int press_start=0x7f07001b;
-        public static final int press_start_en=0x7f07001c;
-        public static final int range_label=0x7f07002d;
-        public static final int range_label_en=0x7f07002e;
-        public static final int reset_history=0x7f070025;
-        public static final int reset_history_en=0x7f070026;
-        public static final int save=0x7f070010;
-        public static final int save_en=0x7f070011;
-        public static final int seconds_left=0x7f07002b;
-        public static final int seconds_left_en=0x7f07002c;
-        public static final int title_activity_help=0x7f070017;
-        public static final int title_activity_help_en=0x7f070018;
-        public static final int title_activity_history=0x7f070015;
-        public static final int title_activity_history_en=0x7f070016;
-        public static final int title_activity_main=0x7f070012;
-        public static final int title_activity_measure=0x7f070013;
-        public static final int title_activity_measure_en=0x7f070014;
-        public static final int title_activity_profile=0x7f070019;
-        public static final int title_activity_profile_en=0x7f07001a;
-        public static final int zoom_out=0x7f070023;
-        public static final int zoom_out_en=0x7f070024;
+        public static final int autostop=0x7f07000f;
+        public static final int female=0x7f070011;
+        public static final int help=0x7f07000b;
+        public static final int male=0x7f070010;
+        public static final int press_start=0x7f07000c;
+        public static final int reset_history=0x7f070014;
+        public static final int save=0x7f070012;
+        public static final int title_activity_help=0x7f070003;
+        public static final int title_activity_history=0x7f070005;
+        public static final int title_activity_main=0x7f07000a;
+        public static final int title_activity_profile=0x7f070004;
+        public static final int zoom_out=0x7f070013;
     }
     public static final class style {
         /** 
