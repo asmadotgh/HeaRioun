@@ -1,15 +1,15 @@
 package edu.ce.sharif.hearioun;
 
 public class Constants {
-	
+	/*
 	//for measure tab
-	public final static String INITIALIZING="Initializing...";
-	public final static String SECONDS_LEFT=" seconds left...";
+	public final static String INITIALIZING;
+	public final static String SECONDS_LEFT;
 	
 	//for history tab
 	
-	public final static String RANGE_LABEL="Per Minute";
-	public final static String BR="BR";
-	public final static String HR="HR";
-
+	public final static String RANGE_LABEL;
+	public final static String BR;
+	public final static String HR;
+*/
 }

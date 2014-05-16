@@ -23,38 +23,41 @@ public class MainActivity extends TabActivity {
 		Intent intentMeasure = new Intent().setClass(this, Measure.class);
 		TabSpec tabSpecMeasure = tabHost
 			.newTabSpec("Measure")
-			.setIndicator("Measure", ressources.getDrawable(R.drawable.icon_measure_config))
+			.setIndicator(getString(R.string.title_activity_measure), ressources.getDrawable(R.drawable.icon_measure_config))
 			.setContent(intentMeasure);
 
 		// History tab
 		Intent intentHistory = new Intent().setClass(this, History.class);
 		TabSpec tabSpecHistory = tabHost
 			.newTabSpec("History")
-			.setIndicator("History", ressources.getDrawable(R.drawable.icon_history_config))
+			.setIndicator(getString(R.string.title_activity_history), ressources.getDrawable(R.drawable.icon_history_config))
 			.setContent(intentHistory);
 		
 		// Help tab
 		Intent intentHelp = new Intent().setClass(this, Help.class);
 		TabSpec tabSpecHelp = tabHost
 			.newTabSpec("Help")
-			.setIndicator("Help", ressources.getDrawable(R.drawable.icon_help_config))
+			.setIndicator(getString(R.string.title_activity_help), ressources.getDrawable(R.drawable.icon_help_config))
 			.setContent(intentHelp);
 		
 		// Profile tab
 		Intent intentProfile = new Intent().setClass(this, Profile.class);
 		TabSpec tabSpecProfile = tabHost
 			.newTabSpec("Profile")
-			.setIndicator("Profile", ressources.getDrawable(R.drawable.icon_profile_config))
+			.setIndicator(getString(R.string.title_activity_profile), ressources.getDrawable(R.drawable.icon_profile_config))
 			.setContent(intentProfile);
 	
 		// add all tabs 
-		tabHost.addTab(tabSpecMeasure);
-		tabHost.addTab(tabSpecHistory);
-		tabHost.addTab(tabSpecHelp);
 		tabHost.addTab(tabSpecProfile);
+		tabHost.addTab(tabSpecHelp);
+		tabHost.addTab(tabSpecHistory);
+		tabHost.addTab(tabSpecMeasure);
+		
+		
+		
 		
 		//set Windows tab as default (zero based)
-		tabHost.setCurrentTab(0);
+		tabHost.setCurrentTab(3);
 		
 
 				

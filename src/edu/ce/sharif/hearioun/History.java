@@ -78,14 +78,14 @@ public class History extends Activity implements OnTouchListener{
 		mySimpleXYPlot.getGraphWidget().setDomainValueFormat(
 				new DecimalFormat("#####"));
 		mySimpleXYPlot.getGraphWidget().setRangeLabelWidth(50);
-		mySimpleXYPlot.setRangeLabel(Constants.RANGE_LABEL);
+		mySimpleXYPlot.setRangeLabel(getString(R.string.range_label));
 		mySimpleXYPlot.setDomainLabel("");
 
 		mySimpleXYPlot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
 		//mySimpleXYPlot.disableAllMarkup();
 		series = new SimpleXYSeries[2];
-		series[0]=new SimpleXYSeries(Constants.BR);
-		series[1]=new SimpleXYSeries(Constants.HR);
+		series[0]=new SimpleXYSeries(getString(R.string.BR));
+		series[1]=new SimpleXYSeries(getString(R.string.HR));
 		mySimpleXYPlot.addSeries(series[1],
 				new LineAndPointFormatter(Color.rgb(150, 20, 20), null,
 						Color.rgb(245, 50, 50), null));
