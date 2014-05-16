@@ -34,7 +34,6 @@ import graphicComponents.BreathingCanvas;
 import graphicComponents.ECGCanvas;
 
 public class Measure extends Activity {
-
 	
 	private PrefManager prefManager=null;
 
@@ -142,10 +141,8 @@ public class Measure extends Activity {
 			}
 		}
 		else{
-			if(STARTING_NOISE){
-				tv.setVisibility(View.VISIBLE);
+			if(STARTING_NOISE)
 				tv.setText(getString(R.string.initializing));
-			}
 			else
 				tv.setText((int) (myMin(((100-progress)*myMin(SIGNAL_SECONDS,10)/100)+1,10))+" "+getString(R.string.seconds_left));
 		}
@@ -619,7 +616,7 @@ public class Measure extends Activity {
 		STARTING_NOISE=true;
 		
 		TextView tv=(TextView) findViewById(R.id.progressText);
-		tv.setText("Press Start");
+		tv.setText(getString(R.string.press_start));
 		
 		canvas=new ECGCanvas();
 	    drawingGraph = (LinearLayout) findViewById(R.id.ECGView); 

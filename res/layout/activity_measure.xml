@@ -105,7 +105,7 @@
         android:scaleType="matrix"
         android:layout_below="@+id/ECG" 
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="115dp"
+        android:layout_marginTop="105dp"
         android:src="@drawable/beat" />
     
 
@@ -136,9 +136,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/progressBar"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:textSize="18sp"
+        android:typeface="serif"
         android:text="@string/press_start" />
 
     
@@ -151,6 +152,7 @@
         android:layout_marginTop="105dp"
         android:layout_marginRight="24dp"
         android:textSize="24sp"
+        android:typeface="serif"
         android:text="@string/HR" />
     
      <TextView
@@ -161,6 +163,7 @@
         android:layout_below="@+id/TextViewHR"
         android:layout_centerVertical="true"
         android:textSize="24sp"
+        android:typeface="serif"
         android:text="" />
 
     <TextView
@@ -172,6 +175,7 @@
         android:layout_marginTop="105dp"
         android:layout_marginLeft="36dp"
         android:textSize="24sp"
+        android:typeface="serif"
         android:text="@string/BR" />
     
     <TextView
@@ -182,6 +186,7 @@
         android:layout_alignRight="@+id/TextViewBR"
         android:layout_centerVertical="true"
         android:textSize="24sp"
+        android:typeface="serif"
         android:text="" />
     
 
