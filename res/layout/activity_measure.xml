@@ -105,7 +105,7 @@
         android:scaleType="matrix"
         android:layout_below="@+id/ECG" 
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="115dp"
         android:src="@drawable/beat" />
     
 
@@ -136,11 +136,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/progressBar"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
         android:textSize="18sp"
         android:typeface="serif"
-        android:text="Press Start" />
+        android:text="@string/press_start" />
 
     
     <TextView
@@ -153,7 +153,7 @@
         android:layout_marginLeft="24dp"
         android:textSize="24sp"
         android:typeface="serif"
-        android:text="HR" />
+        android:text="@string/HR" />
     
      <TextView
         android:id="@+id/TextViewHRAmount"
@@ -176,7 +176,7 @@
         android:layout_marginRight="36dp"
         android:textSize="24sp"
         android:typeface="serif"
-        android:text="BR" />
+        android:text="@string/BR" />
     
     <TextView
         android:id="@+id/TextViewBRAmount"
@@ -230,6 +230,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/startButton"
         android:layout_centerHorizontal="true"
-        android:text="Autostop after 10 seconds measurement?" />
+        android:text="@string/autostop" />
 
 </RelativeLayout>

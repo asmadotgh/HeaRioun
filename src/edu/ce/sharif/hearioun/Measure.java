@@ -34,6 +34,7 @@ import graphicComponents.BreathingCanvas;
 import graphicComponents.ECGCanvas;
 
 public class Measure extends Activity {
+
 	
 	private PrefManager prefManager=null;
 
@@ -132,6 +133,7 @@ public class Measure extends Activity {
 		TextView tv=(TextView) findViewById(R.id.progressText);
 		autoStop=autoStop_cb.isChecked();
 		if (progress>=100){
+			tv.setVisibility(View.INVISIBLE);
 			tv.setText("Done!");
 			//if still measuring, toggles as if the stop button is clicked
 			if(autoStop && progress==100){
@@ -140,10 +142,12 @@ public class Measure extends Activity {
 			}
 		}
 		else{
-			if(STARTING_NOISE)
-				tv.setText("Initializing...");
+			if(STARTING_NOISE){
+				tv.setVisibility(View.VISIBLE);
+				tv.setText(Constants.INITIALIZING);
+			}
 			else
-				tv.setText((int) (myMin(((100-progress)*myMin(SIGNAL_SECONDS,10)/100)+1,10))+" seconds left...");
+				tv.setText((int) (myMin(((100-progress)*myMin(SIGNAL_SECONDS,10)/100)+1,10))+Constants.SECONDS_LEFT);
 		}
 		
 		if(SIGNAL_ACQUIRED){

@@ -140,14 +140,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Male"
+            android:text="@string/male"
             android:textSize="14sp" />
 
         <RadioButton
             android:id="@+id/radioFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Female"
+            android:text="@string/female"
             android:textSize="14sp" />
     </RadioGroup>
 
@@ -160,6 +160,6 @@
         android:layout_below="@+id/radioGender"
         android:layout_marginTop="32dp"
         android:onClick="onConfirm"
-        android:text="Save" />
+        android:text="@string/save" />
 
 </RelativeLayout>
