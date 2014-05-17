@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.PointF;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.FloatMath;
 import android.view.MotionEvent;
@@ -66,6 +67,23 @@ public class History extends Activity implements OnTouchListener{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.history_graph);
+		
+		//setting the font
+
+		Typeface font_fa = Typeface.createFromAsset(getAssets(), "fonts/bnazanin.ttf");
+
+		//all text views
+		/*TextView tmp=(TextView)findViewById(R.id.rangeLabel);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.HR);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.BR);
+		tmp.setTypeface(font_fa);*/
+		//buttons
+		Button tmp2=(Button)findViewById(R.id.zoomOutButton);
+		tmp2.setTypeface(font_fa);
+		tmp2=(Button)findViewById(R.id.resetButton);
+		tmp2.setTypeface(font_fa);
 
 
 		mySimpleXYPlot = (XYPlot) findViewById(R.id.mySimpleXYPlot);

@@ -147,10 +147,10 @@ public final class R {
         public static final int resetButton=0x7f0a001c;
         public static final int startButton=0x7f0a001d;
         public static final int stopButton=0x7f0a001e;
-        public static final int textView1=0x7f0a0000;
         public static final int textViewAge=0x7f0a0023;
         public static final int textViewGender=0x7f0a0029;
         public static final int textViewHeight=0x7f0a0027;
+        public static final int textViewHelp=0x7f0a0000;
         public static final int textViewInterval=0x7f0a0009;
         public static final int textViewName=0x7f0a0020;
         public static final int textViewWeight=0x7f0a0026;
@@ -177,8 +177,6 @@ public final class R {
     }
     public static final class raw {
         public static final int beat=0x7f040000;
-        public static final int bnazanin=0x7f040001;
-        public static final int bnazaninb=0x7f040002;
     }
     public static final class string {
         public static final int Age=0x7f070002;

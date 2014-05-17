@@ -3,13 +3,13 @@ package edu.ce.sharif.hearioun;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import edu.ce.sharif.hearioun.database.PrefManager;
 
 public class MainActivity extends TabActivity {
- 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

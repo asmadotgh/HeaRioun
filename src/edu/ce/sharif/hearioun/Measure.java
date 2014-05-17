@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.Path;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
@@ -262,6 +263,25 @@ public class Measure extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_measure);
+		
+		//setting the font
+		
+		Typeface font_fa = Typeface.createFromAsset(getAssets(), "fonts/bnazanin.ttf");
+		
+		//all text views
+		TextView tmp=(TextView)findViewById(R.id.TextViewHR);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.TextViewHRAmount);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.TextViewBR);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.TextViewBRAmount);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.progressText);
+		tmp.setTypeface(font_fa);
+		//checkboxes
+		CheckBox tmp2=(CheckBox)findViewById(R.id.autoStopCheckBox);
+		tmp2.setTypeface(font_fa);
 
 
 		//reading from DB

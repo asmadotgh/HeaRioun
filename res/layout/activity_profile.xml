@@ -16,6 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="30dp"
         android:layout_marginTop="30dp"
+        android:textSize="20sp"
         android:text="@string/Name" />
 
     <EditText
@@ -28,6 +29,7 @@
         android:layout_marginLeft="30dp"
         android:layout_toLeftOf="@+id/textViewName"
         android:ems="10"
+        android:textSize="20sp"
         android:inputType="textPersonName" />
 
        <!--
@@ -51,6 +53,7 @@
         android:layout_alignRight="@+id/textViewName"
         android:layout_below="@+id/textViewName"
         android:layout_marginTop="30dp"
+        android:textSize="20sp"
         android:text="@string/Age" />
 
     <EditText
@@ -63,6 +66,7 @@
         android:layout_marginLeft="30dp"
         android:layout_toLeftOf="@+id/textViewAge"
         android:ems="10"
+        android:textSize="20sp"
         android:inputType="number" >
 
         <requestFocus />
@@ -75,6 +79,7 @@
         android:layout_alignRight="@+id/textViewAge"
         android:layout_below="@+id/textViewAge"
         android:layout_marginTop="30dp"
+        android:textSize="20sp"
         android:text="@string/Weight" />
 
     <EditText
@@ -87,6 +92,7 @@
         android:layout_marginLeft="30dp"
         android:layout_toLeftOf="@+id/textViewWeight"
         android:ems="10"
+        android:textSize="20sp"
         android:inputType="number" >
 
         <requestFocus />
@@ -99,6 +105,7 @@
         android:layout_alignRight="@+id/textViewWeight"
         android:layout_below="@+id/textViewWeight"
         android:layout_marginTop="30dp"
+        android:textSize="20sp"
         android:text="@string/Height" />
 
     <EditText
@@ -111,6 +118,7 @@
         android:layout_marginLeft="30dp"
         android:layout_toLeftOf="@+id/textViewHeight"
         android:ems="10"
+        android:textSize="20sp"
         android:inputType="number" >
 
         <requestFocus />
@@ -123,6 +131,7 @@
         android:layout_alignRight="@+id/textViewName"
         android:layout_below="@+id/textViewHeight"
         android:layout_marginTop="30dp"
+        android:textSize="20sp"
         android:text="@string/Gender" />
 
     <RadioGroup
@@ -133,6 +142,7 @@
         android:layout_below="@+id/editTextHeight"
         android:layout_marginRight="20dp"
         android:orientation="horizontal"
+        android:textSize="20sp"
         android:paddingTop="15dp" >
 
         <RadioButton
@@ -141,14 +151,14 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="@string/male"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/radioFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/female"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
     </RadioGroup>
 
     <Button
@@ -160,6 +170,7 @@
         android:layout_below="@+id/radioGender"
         android:layout_marginTop="32dp"
         android:onClick="onConfirm"
+        android:textSize="20sp"
         android:text="@string/save" />
 
 </RelativeLayout>

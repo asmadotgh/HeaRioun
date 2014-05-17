@@ -2,10 +2,15 @@ package edu.ce.sharif.hearioun;
 
 import edu.ce.sharif.hearioun.database.PrefManager;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +23,42 @@ public class Profile extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
+		
+		//setting the font
+
+		Typeface font_fa = Typeface.createFromAsset(getAssets(), "fonts/bnazanin.ttf");
+
+		//all text views
+		TextView tmp=(TextView)findViewById(R.id.textViewName);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewAge);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewWeight);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewHeight);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewGender);
+		tmp.setTypeface(font_fa);
+		//edit texts
+		EditText tmp2=(EditText)findViewById(R.id.editTextName);
+		tmp2.setTypeface(font_fa);
+		tmp2=(EditText)findViewById(R.id.editTextAge);
+		tmp2.setTypeface(font_fa);
+		tmp2=(EditText)findViewById(R.id.editTextWeight);
+		tmp2.setTypeface(font_fa);
+		tmp2=(EditText)findViewById(R.id.editTextHeight);
+		tmp2.setTypeface(font_fa);
+		//radio group
+		RadioGroup tmp3=(RadioGroup)findViewById(R.id.radioGender);
+		//tmp3.sett
+		//radio buttons
+		RadioButton tmp4=(RadioButton)findViewById(R.id.radioMale);
+		tmp4.setTypeface(font_fa);
+		tmp4=(RadioButton)findViewById(R.id.radioFemale);
+		tmp4.setTypeface(font_fa);
+		//buttons
+		Button tmp5=(Button)findViewById(R.id.buttonProfileConfirm);
+		tmp5.setTypeface(font_fa);
 		
 		//reading from DB
 		prefManager=new PrefManager(this);
