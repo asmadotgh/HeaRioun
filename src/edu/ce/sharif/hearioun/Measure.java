@@ -142,8 +142,10 @@ public class Measure extends Activity {
 			}
 		}
 		else{
-			if(STARTING_NOISE)
+			if(STARTING_NOISE){
 				tv.setText(getString(R.string.initializing));
+				tv.setVisibility(View.VISIBLE);
+			}
 			else
 				tv.setText((int) (myMin(((100-progress)*myMin(SIGNAL_SECONDS,10)/100)+1,10))+" "+getString(R.string.seconds_left));
 		}

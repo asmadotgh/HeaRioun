@@ -18,6 +18,23 @@
     <string name="range_label_en">Per Minute</string>
     <string name="OK">تایید</string>
     <string name="OK_en">OK</string>
+    <string name="result">نتیجه</string>
+    <string name="result_en">Result</string>
+    <string name="HR_text">تعداد ضربان قلب: </string><string name="BR_text">تعداد تنفس:</string><string name="incomplete_profile">برای اطلاع دقیق از وضعیت سلامتتان، اطلاعات مربوط به صفحه پروفایل را تکمیل کنید.</string>
+    <string name="incomplete_profile_en">To get more accurate feedback about your health status, please complete your information in profile tab.</string>
+    <string name="share">نتیجه را با دوستانتان به اشتراک بگذراید!</string>
+    <string name="share_en">Share the results with your friends!</string>
+    <string name="health_status">وضعیت سلامتی</string>
+    <string name="health_status_en">Your Health Status</string>
+    <string name="according_to">با توجه به سن، جنسیت، قد، وزن، و میانگین اندازه گیری های قبلی برای شما، </string>
+    <string name="heart_beat">ضربان قلب شما </string>
+    <string name="breathing_rate">تنفس شما </string>
+    <string name="physical_activity">و میزان فعالیت شما نسبت به وضعیت کلی جسمیتان </string>
+    <string name="is">است. </string>
+    <string name="breathing_advice">بهتر است عمیق تر نفس بکشید.</string>
+    <string name="activity_advice1"></string>
+    
+    
     
     
 

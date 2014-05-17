@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 import edu.ce.sharif.hearioun.database.PrefManager;
 
 public class MainActivity extends TabActivity {
@@ -18,6 +19,11 @@ public class MainActivity extends TabActivity {
 		
 		Resources ressources = getResources(); 
 		TabHost tabHost = getTabHost(); 
+		
+		//setting font
+		/*Typeface font_fa = Typeface.createFromAsset(getAssets(), "fonts/bnazanin.ttf");
+		TextView txtFont = new TextView(this);
+		txtFont.setTypeface(font_fa);*/
 		
 		// Measure tab
 		Intent intentMeasure = new Intent().setClass(this, Measure.class);
