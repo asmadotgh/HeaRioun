@@ -16,6 +16,8 @@
     <string name="seconds_left_en"> seconds left...</string>
     <string name="range_label">در دقیقه</string>
     <string name="range_label_en">Per Minute</string>
+    <string name="OK">تایید</string>
+    <string name="OK_en">OK</string>
     
     
 

@@ -104,8 +104,11 @@ public final class R {
         public static final int progress_particle=0x7f020022;
         public static final int progress_still=0x7f020023;
         public static final int reset=0x7f020024;
-        public static final int start=0x7f020025;
-        public static final int stop=0x7f020026;
+        public static final int resetd=0x7f020025;
+        public static final int start=0x7f020026;
+        public static final int startd=0x7f020027;
+        public static final int stop=0x7f020028;
+        public static final int stopd=0x7f020029;
     }
     public static final class id {
         public static final int Breathing=0x7f0a000f;
@@ -191,6 +194,8 @@ public final class R {
         public static final int Height_en=0x7f07000b;
         public static final int Name=0x7f070006;
         public static final int Name_en=0x7f070007;
+        public static final int OK=0x7f07002f;
+        public static final int OK_en=0x7f070030;
         public static final int Weight=0x7f070008;
         public static final int Weigth_en=0x7f070009;
         public static final int action_settings=0x7f070001;

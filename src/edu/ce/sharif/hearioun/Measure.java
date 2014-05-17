@@ -195,15 +195,21 @@ public class Measure extends Activity {
             	ImageButton stopButton=(ImageButton) Measure.this.findViewById(R.id.stopButton);
         		if(progress<100){
         			startButton.setEnabled(false);
+        			startButton.setBackgroundResource(R.drawable.startd);
         			stopButton.setEnabled(false);
+        			stopButton.setBackgroundResource(R.drawable.stopd);
         		}else{
         			if(processing.get()){
         				startButton.setEnabled(true);
+        				startButton.setBackgroundResource(R.drawable.start);
         				stopButton.setEnabled(false);
+        				stopButton.setBackgroundResource(R.drawable.stopd);
         			}
         			else{
         				stopButton.setEnabled(true);
+        				stopButton.setBackgroundResource(R.drawable.stop);
         				startButton.setEnabled(false);
+        				startButton.setBackgroundResource(R.drawable.startd);
         			}
         		}
                 
@@ -294,6 +300,7 @@ public class Measure extends Activity {
 		
 		ImageButton stop=(ImageButton) findViewById(R.id.stopButton);
 		stop.setEnabled(false);
+		stop.setBackgroundResource(R.drawable.stopd);
 		
 	
 
@@ -554,7 +561,9 @@ public class Measure extends Activity {
 		ImageButton startButton=(ImageButton) Measure.this.findViewById(R.id.startButton);
 		ImageButton stopButton=(ImageButton) Measure.this.findViewById(R.id.stopButton);
 		startButton.setEnabled(true);
+		startButton.setBackgroundResource(R.drawable.start);
     	stopButton.setEnabled(false);
+    	stopButton.setBackgroundResource(R.drawable.stopd);
     	
 		ImageView still = (ImageView) Measure.this.findViewById(R.id.progressBarStill);
 		
@@ -573,13 +582,15 @@ public class Measure extends Activity {
 		myMsg.setPadding(10, 0, 0, 5);
 		myMsg.setGravity(Gravity.LEFT);
 		builder.setView(myMsg);
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dlg,
 					int sumthin) {
 				ImageButton start = (ImageButton) Measure.this.findViewById(R.id.startButton);
 				ImageButton stop = (ImageButton) Measure.this.findViewById(R.id.stopButton);
 				start.setEnabled(true);
+				start.setBackgroundResource(R.drawable.start);
 				stop.setEnabled(false);
+				stop.setBackgroundResource(R.drawable.stopd);
 				
 				
 				prefManager=new PrefManager(Measure.this);
@@ -598,6 +609,7 @@ public class Measure extends Activity {
 		
 		ImageButton stopButton=(ImageButton) Measure.this.findViewById(R.id.stopButton);
     	stopButton.setEnabled(false);
+    	stopButton.setBackgroundResource(R.drawable.stopd);
     	
     	
 		ImageView still = (ImageView) Measure.this.findViewById(R.id.progressBarStill);
@@ -619,7 +631,9 @@ public class Measure extends Activity {
 		ImageButton startButton=(ImageButton) Measure.this.findViewById(R.id.startButton);
 		ImageButton stopButton=(ImageButton) Measure.this.findViewById(R.id.stopButton);
 		startButton.setEnabled(true);
+		startButton.setBackgroundResource(R.drawable.start);
     	stopButton.setEnabled(false);
+    	stopButton.setBackgroundResource(R.drawable.stopd);
     	
 		ImageView still = (ImageView) Measure.this.findViewById(R.id.progressBarStill);
 		
