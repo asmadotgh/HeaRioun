@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.ce.sharif.hearioun"
+<manifest package="edu.ce.sharif.hearioun"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 
      <uses-sdk
          android:minSdkVersion="11"
@@ -17,9 +16,11 @@
     <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
 
     <application
+        
+        android:theme="@style/mainTheme"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" android:theme="@style/AppBaseTheme">
+        android:icon="@drawable/violet"
+        android:label="@string/app_name">
         <!-- android:theme="@style/AppThemeDark" -->
         
         <!-- android:theme="@style/AppTheme" > -->
@@ -46,15 +47,21 @@
         <activity
             android:label="@string/app_name"
             android:name="edu.ce.sharif.hearioun.MainActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
             android:screenOrientation="portrait" >
             
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+<activity  
+    android:name="SplashScreen" 
+    android:theme="@style/Theme.Transparent"             
+> 
+    <intent-filter> 
+        <action android:name="android.intent.action.MAIN"></action> 
+        <category android:name="android.intent.category.LAUNCHER"></category> 
+    </intent-filter> 
+</activity> 
+
     </application>
 
 </manifest>
+
+<!-- android:theme="@android:style/Theme.NoTitleBar" -->

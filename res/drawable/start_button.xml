@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- PRESSED -->
+    <item android:drawable="@drawable/starts"
+          android:state_pressed="true" />
+    <!-- ENABLE-->
+    <item android:drawable="@drawable/start"
+        android:state_enabled="true"
+        android:state_pressed="false"/>
+    <!-- DISABLE-->
+       <item android:drawable="@drawable/startd"
+           android:state_enabled="false"/>
+</selector>

@@ -80,7 +80,7 @@ public class Profile extends Activity {
 		prefManager.loadSavedPreferences();
 		
 		
-		Toast.makeText(this,"Profile updated.",Toast.LENGTH_SHORT).show();
+		Toast.makeText(this,this.getResources().getString(R.string.profile_updated),Toast.LENGTH_SHORT).show();
 		
 		TextView name_tv=(TextView) findViewById(R.id.editTextName);
 		TextView age_tv=(TextView) findViewById(R.id.editTextAge);

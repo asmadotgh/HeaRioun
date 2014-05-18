@@ -105,11 +105,11 @@ public class History extends Activity implements OnTouchListener{
 		series[0]=new SimpleXYSeries(getString(R.string.BR));
 		series[1]=new SimpleXYSeries(getString(R.string.HR));
 		mySimpleXYPlot.addSeries(series[1],
-				new LineAndPointFormatter(Color.rgb(150, 20, 20), null,
-						Color.rgb(245, 50, 50), null));
+				new LineAndPointFormatter(this.getResources().getColor(R.color.theme4_gray), null,
+						this.getResources().getColor(R.color.theme8_blue_graph), null));
 		mySimpleXYPlot.addSeries(series[0],
-				new LineAndPointFormatter(Color.rgb(25, 140, 25), null,
-						Color.rgb(50, 230, 50), null));
+				new LineAndPointFormatter(this.getResources().getColor(R.color.theme4_gray), null,
+						this.getResources().getColor(R.color.theme9_green_graph), null));
 
 
 
@@ -137,6 +137,20 @@ public class History extends Activity implements OnTouchListener{
 			}
 		});
 
+		
+		//changing colors
+		
+		mySimpleXYPlot.getGraphWidget().getRangeLabelPaint().setColor(this.getResources().getColor(R.color.theme7_black));
+		mySimpleXYPlot.getGraphWidget().getRangeLabelPaint().setTypeface(font_fa);
+		mySimpleXYPlot.getGraphWidget().getRangeOriginLabelPaint().setColor(this.getResources().getColor(R.color.theme7_black));
+		mySimpleXYPlot.getGraphWidget().getRangeOriginLabelPaint().setTypeface(font_fa);
+		mySimpleXYPlot.getGraphWidget().getDomainLabelPaint().setColor(this.getResources().getColor(R.color.theme7_black));
+		mySimpleXYPlot.getGraphWidget().getDomainLabelPaint().setTypeface(font_fa);
+		mySimpleXYPlot.getGraphWidget().getDomainOriginLabelPaint().setColor(this.getResources().getColor(R.color.theme7_black));
+		mySimpleXYPlot.getGraphWidget().getDomainOriginLabelPaint().setTypeface(font_fa);
+		mySimpleXYPlot.getLegendWidget().getTextPaint().setColor(this.getResources().getColor(R.color.theme7_black));
+		mySimpleXYPlot.getLegendWidget().getTextPaint().setTypeface(font_fa);
+		
 		//reading from DB
 		prefManager=new PrefManager(this);
 		prefManager.loadSavedPreferences();

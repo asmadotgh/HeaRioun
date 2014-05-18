@@ -43,8 +43,26 @@ public final class R {
         public static final int slight_green=0x7f050023;
         public static final int slight_orange=0x7f050021;
         public static final int stair_blue=0x7f05001b;
+        /**  MY NEW BEAUTIFUL THEME :D 
+         */
+        public static final int t_theme1_light=0x7f05002e;
+        public static final int t_theme2_pink=0x7f05002f;
+        public static final int t_theme3_red=0x7f050030;
+        public static final int t_theme4_pink=0x7f050031;
+        public static final int t_theme5_brown=0x7f050032;
         public static final int text_darkgrey=0x7f050014;
         public static final int text_lightgrey=0x7f050015;
+        /**  MY NEW BEAUTIFUL THEME :D 
+         */
+        public static final int theme1_light=0x7f050025;
+        public static final int theme2_light_violet=0x7f050026;
+        public static final int theme3_violet=0x7f050027;
+        public static final int theme4_gray=0x7f050028;
+        public static final int theme5_blue=0x7f050029;
+        public static final int theme6_light_blue=0x7f05002a;
+        public static final int theme7_black=0x7f05002b;
+        public static final int theme8_blue_graph=0x7f05002c;
+        public static final int theme9_green_graph=0x7f05002d;
         public static final int transparent=0x7f050024;
         public static final int violete_red=0x7f05001a;
         public static final int white=0x7f050016;
@@ -70,108 +88,122 @@ public final class R {
         public static final int beat=0x7f020000;
         public static final int beat1=0x7f020001;
         public static final int beat2=0x7f020002;
-        public static final int help=0x7f020003;
-        public static final int help_d=0x7f020004;
-        public static final int help_info=0x7f020005;
-        public static final int history=0x7f020006;
-        public static final int history_d=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int icon_help_config=0x7f020009;
-        public static final int icon_history_config=0x7f02000a;
-        public static final int icon_measure_config=0x7f02000b;
-        public static final int icon_profile_config=0x7f02000c;
-        public static final int measure=0x7f02000d;
-        public static final int measure_d=0x7f02000e;
-        public static final int my_box_border_bottom=0x7f02000f;
-        public static final int needle=0x7f020010;
-        public static final int nexticon=0x7f020011;
-        public static final int nexticon_nonclickable=0x7f020012;
-        public static final int paper_all=0x7f020013;
-        public static final int paper_all0=0x7f020014;
-        public static final int paper_all1=0x7f020015;
-        public static final int paper_all2=0x7f020016;
-        public static final int paper_all3=0x7f020017;
-        public static final int paper_all4=0x7f020018;
-        public static final int paper_cut=0x7f020019;
-        public static final int paper_graph=0x7f02001a;
-        public static final int paper_tray=0x7f02001b;
-        public static final int previousicon=0x7f02001c;
-        public static final int previousicon_nonclickable=0x7f02001d;
-        public static final int profile=0x7f02001e;
-        public static final int profile_d=0x7f02001f;
-        public static final int progress_circle=0x7f020020;
-        public static final int progress_circular_background=0x7f020021;
-        public static final int progress_particle=0x7f020022;
-        public static final int progress_still=0x7f020023;
-        public static final int reset=0x7f020024;
-        public static final int resetd=0x7f020025;
-        public static final int start=0x7f020026;
-        public static final int startd=0x7f020027;
-        public static final int stop=0x7f020028;
-        public static final int stopd=0x7f020029;
+        public static final int button_bg=0x7f020003;
+        public static final int help=0x7f020004;
+        public static final int help_d=0x7f020005;
+        public static final int help_info=0x7f020006;
+        public static final int history=0x7f020007;
+        public static final int history_d=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int icon_help_config=0x7f02000a;
+        public static final int icon_history_config=0x7f02000b;
+        public static final int icon_measure_config=0x7f02000c;
+        public static final int icon_profile_config=0x7f02000d;
+        public static final int measure=0x7f02000e;
+        public static final int measure_d=0x7f02000f;
+        public static final int my_box_border_bottom=0x7f020010;
+        public static final int needle=0x7f020011;
+        public static final int nexticon=0x7f020012;
+        public static final int nexticon_nonclickable=0x7f020013;
+        public static final int paper_all=0x7f020014;
+        public static final int paper_all0=0x7f020015;
+        public static final int paper_all1=0x7f020016;
+        public static final int paper_all2=0x7f020017;
+        public static final int paper_all3=0x7f020018;
+        public static final int paper_all4=0x7f020019;
+        public static final int paper_cut=0x7f02001a;
+        public static final int paper_graph=0x7f02001b;
+        public static final int paper_tray=0x7f02001c;
+        public static final int previousicon=0x7f02001d;
+        public static final int previousicon_nonclickable=0x7f02001e;
+        public static final int profile=0x7f02001f;
+        public static final int profile_d=0x7f020020;
+        public static final int progress_circle=0x7f020021;
+        public static final int progress_circular_background=0x7f020022;
+        public static final int progress_particle=0x7f020023;
+        public static final int progress_still=0x7f020024;
+        public static final int progress_still_d=0x7f020025;
+        public static final int reset=0x7f020026;
+        public static final int reset_button=0x7f020027;
+        public static final int resetd=0x7f020028;
+        public static final int resets=0x7f020029;
+        public static final int splash=0x7f02002a;
+        public static final int start=0x7f02002b;
+        public static final int start_button=0x7f02002c;
+        public static final int startd=0x7f02002d;
+        public static final int starts=0x7f02002e;
+        public static final int stop=0x7f02002f;
+        public static final int stop_button=0x7f020030;
+        public static final int stopd=0x7f020031;
+        public static final int stops=0x7f020032;
+        public static final int tab_selector=0x7f020033;
+        public static final int violet=0x7f020034;
     }
     public static final class id {
-        public static final int BRText=0x7f0a0034;
-        public static final int Breathing=0x7f0a000f;
-        public static final int BreathingLine=0x7f0a0011;
-        public static final int ECG=0x7f0a000a;
-        public static final int ECGLine=0x7f0a000c;
-        public static final int ECGView=0x7f0a000e;
-        public static final int HRText=0x7f0a0032;
-        public static final int HRTextAmount=0x7f0a0033;
-        public static final int TextViewBR=0x7f0a001a;
-        public static final int TextViewBRAmount=0x7f0a001b;
-        public static final int TextViewHR=0x7f0a0018;
-        public static final int TextViewHRAmount=0x7f0a0019;
-        public static final int according2=0x7f0a0037;
-        public static final int action_settings=0x7f0a003c;
-        public static final int advice=0x7f0a0036;
-        public static final int adviceView=0x7f0a0035;
+        public static final int BRText=0x7f0a0035;
+        public static final int Breathing=0x7f0a000c;
+        public static final int BreathingLine=0x7f0a000e;
+        public static final int ECG=0x7f0a0007;
+        public static final int ECGLine=0x7f0a0009;
+        public static final int ECGView=0x7f0a000b;
+        public static final int HRText=0x7f0a0033;
+        public static final int HRTextAmount=0x7f0a0034;
+        public static final int SplashImageView=0x7f0a003e;
+        public static final int TextViewBR=0x7f0a0017;
+        public static final int TextViewBRAmount=0x7f0a0018;
+        public static final int TextViewHR=0x7f0a0015;
+        public static final int TextViewHRAmount=0x7f0a0016;
+        public static final int TheSplashLayout=0x7f0a003d;
+        public static final int according2=0x7f0a0038;
+        public static final int action_settings=0x7f0a003f;
+        public static final int advice=0x7f0a0037;
+        public static final int adviceView=0x7f0a0036;
         public static final int aprHistoryPlot=0x7f0a002d;
-        public static final int autoStopCheckBox=0x7f0a001f;
-        public static final int breathingRate=0x7f0a0039;
-        public static final int breathingView=0x7f0a0013;
-        public static final int buttonProfileConfirm=0x7f0a002c;
-        public static final int datePanel=0x7f0a0002;
-        public static final int dateText=0x7f0a0004;
-        public static final int editTextAge=0x7f0a0024;
-        public static final int editTextHeight=0x7f0a0028;
-        public static final int editTextName=0x7f0a0021;
-        public static final int editTextWeight=0x7f0a0022;
-        public static final int graph=0x7f0a0006;
-        public static final int heart_beat=0x7f0a0038;
-        public static final int imageView1=0x7f0a0001;
-        public static final int imageViewBeat=0x7f0a0014;
-        public static final int imageViewNeedle=0x7f0a000d;
-        public static final int imageViewNeedle2=0x7f0a0012;
-        public static final int imageViewPaperTray=0x7f0a000b;
-        public static final int imageViewPaperTray2=0x7f0a0010;
-        public static final int is=0x7f0a003b;
-        public static final int mySimpleXYPlot=0x7f0a002e;
-        public static final int nextLabel=0x7f0a0005;
-        public static final int physicalActivity=0x7f0a003a;
-        public static final int previousLabel=0x7f0a0003;
-        public static final int progressBar=0x7f0a0016;
-        public static final int progressBarStill=0x7f0a0015;
-        public static final int progressText=0x7f0a0017;
-        public static final int radioFemale=0x7f0a002b;
-        public static final int radioGender=0x7f0a0025;
-        public static final int radioMale=0x7f0a002a;
-        public static final int resetButton=0x7f0a001c;
-        public static final int result=0x7f0a0031;
-        public static final int resultView=0x7f0a0030;
-        public static final int startButton=0x7f0a001d;
-        public static final int stopButton=0x7f0a001e;
-        public static final int textViewAge=0x7f0a0023;
-        public static final int textViewGender=0x7f0a0029;
-        public static final int textViewHeight=0x7f0a0027;
-        public static final int textViewHelp=0x7f0a0000;
-        public static final int textViewInterval=0x7f0a0009;
-        public static final int textViewName=0x7f0a0020;
-        public static final int textViewWeight=0x7f0a0026;
-        public static final int zoomControls1=0x7f0a0008;
-        public static final int zoomOutButton=0x7f0a002f;
-        public static final int zoomPanel=0x7f0a0007;
+        public static final int autoStopCheckBox=0x7f0a001d;
+        public static final int breathingRate=0x7f0a003a;
+        public static final int breathingView=0x7f0a0010;
+        public static final int buttonProfileConfirm=0x7f0a002a;
+        public static final int editTextAge=0x7f0a0022;
+        public static final int editTextHeight=0x7f0a0026;
+        public static final int editTextName=0x7f0a001f;
+        public static final int editTextWeight=0x7f0a0020;
+        public static final int graph=0x7f0a0005;
+        public static final int heart_beat=0x7f0a0039;
+        public static final int help_part1=0x7f0a0000;
+        public static final int history_part1=0x7f0a002e;
+        public static final int imageViewBeat=0x7f0a0011;
+        public static final int imageViewHelp=0x7f0a0002;
+        public static final int imageViewNeedle=0x7f0a000a;
+        public static final int imageViewNeedle2=0x7f0a000f;
+        public static final int imageViewPaperTray=0x7f0a0008;
+        public static final int imageViewPaperTray2=0x7f0a000d;
+        public static final int is=0x7f0a003c;
+        public static final int measure_part1=0x7f0a0006;
+        public static final int measure_part2=0x7f0a0019;
+        public static final int mySimpleXYPlot=0x7f0a002f;
+        public static final int physicalActivity=0x7f0a003b;
+        public static final int progressBar=0x7f0a0013;
+        public static final int progressBarStill=0x7f0a0012;
+        public static final int progressText=0x7f0a0014;
+        public static final int radioFemale=0x7f0a0029;
+        public static final int radioGender=0x7f0a0023;
+        public static final int radioMale=0x7f0a0028;
+        public static final int resetButton=0x7f0a001a;
+        public static final int result=0x7f0a0032;
+        public static final int resultView=0x7f0a0031;
+        public static final int startButton=0x7f0a001b;
+        public static final int stopButton=0x7f0a001c;
+        public static final int tabIcon=0x7f0a002b;
+        public static final int tabTitle=0x7f0a002c;
+        public static final int textViewAge=0x7f0a0021;
+        public static final int textViewGender=0x7f0a0027;
+        public static final int textViewHeight=0x7f0a0025;
+        public static final int textViewHelp=0x7f0a0001;
+        public static final int textViewHelp2=0x7f0a0003;
+        public static final int textViewHelp3=0x7f0a0004;
+        public static final int textViewName=0x7f0a001e;
+        public static final int textViewWeight=0x7f0a0024;
+        public static final int zoomOutButton=0x7f0a0030;
     }
     public static final class layout {
         public static final int activity_help=0x7f030000;
@@ -179,10 +211,16 @@ public final class R {
         public static final int activity_main=0x7f030002;
         public static final int activity_measure=0x7f030003;
         public static final int activity_profile=0x7f030004;
-        public static final int ecg_drawer=0x7f030005;
-        public static final int history_graph=0x7f030006;
-        public static final int popup=0x7f030007;
-        public static final int progress_circle=0x7f030008;
+        public static final int appear=0x7f030005;
+        public static final int background_gradient=0x7f030006;
+        public static final int disappear=0x7f030007;
+        public static final int drtick_tab_indicator=0x7f030008;
+        public static final int ecg_drawer=0x7f030009;
+        public static final int history_graph=0x7f03000a;
+        public static final int popup=0x7f03000b;
+        public static final int progress_circle=0x7f03000c;
+        public static final int round_frame=0x7f03000d;
+        public static final int splash=0x7f03000e;
     }
     public static final class menu {
         public static final int help=0x7f090000;
@@ -227,6 +265,8 @@ public final class R {
         public static final int health_status_en=0x7f07003a;
         public static final int heart_beat=0x7f07003c;
         public static final int help=0x7f070027;
+        public static final int help2=0x7f070043;
+        public static final int help3=0x7f070044;
         public static final int help_en=0x7f070028;
         public static final int incomplete_profile=0x7f070035;
         public static final int incomplete_profile_en=0x7f070036;
@@ -238,6 +278,8 @@ public final class R {
         public static final int physical_activity=0x7f07003e;
         public static final int press_start=0x7f07001b;
         public static final int press_start_en=0x7f07001c;
+        public static final int profile_updated=0x7f070045;
+        public static final int profile_updated_en=0x7f070046;
         public static final int range_label=0x7f07002d;
         public static final int range_label_en=0x7f07002e;
         public static final int reset_history=0x7f070025;
@@ -250,6 +292,7 @@ public final class R {
         public static final int seconds_left_en=0x7f07002c;
         public static final int share=0x7f070037;
         public static final int share_en=0x7f070038;
+        public static final int start_page=0x7f070042;
         public static final int title_activity_help=0x7f070017;
         public static final int title_activity_help_en=0x7f070018;
         public static final int title_activity_history=0x7f070015;
@@ -263,6 +306,10 @@ public final class R {
         public static final int zoom_out_en=0x7f070024;
     }
     public static final class style {
+        /**  FOR SPLASH 
+         */
+        public static final int Animations=0x7f080005;
+        public static final int Animations_SplashScreen=0x7f080006;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -289,6 +336,27 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
+        public static final int ButtonDrTick=0x7f08000e;
+        public static final int CheckBoxDrTick=0x7f08000d;
+        /**  
+    <item name="android:checkboxStyle">@style/CheckBoxDrTick</item>
+
+    <item name="android:radioButtonStyle">@style/RadioButtonDrTick</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonDrTick</item>
+  
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarDrTick</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarDrTick</item>
+ 
+         */
+        public static final int DrTickTheme=0x7f080009;
+        public static final int EditTextDrTick=0x7f08000a;
+        public static final int RadioButtonDrTick=0x7f08000c;
+        public static final int TabTextDrTick=0x7f08000f;
+        public static final int TextViewDrTick=0x7f08000b;
+        public static final int Theme_Transparent=0x7f080007;
+        public static final int mainTheme=0x7f080008;
         /** <item name="androidplot.title">Default Title</item>
         <item name="androidplot.domainLabel">my domain</item>
 <item name="XYPlot:androidplot.title">my domain</item>

@@ -1,15 +1,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="340dp"
+    android:layout_height="470dp"
+    android:background="@layout/round_frame"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Profile" >
 
+    <LinearLayout 
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0dp"
+        android:layout_height="0dp">
+        
+    </LinearLayout>
     <TextView
         android:id="@+id/textViewName"
+        style="@style/TextViewDrTick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -48,6 +57,7 @@
 
     <TextView
         android:id="@+id/textViewAge"
+        style="@style/TextViewDrTick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textViewName"
@@ -74,6 +84,7 @@
 
     <TextView
         android:id="@+id/textViewWeight"
+        style="@style/TextViewDrTick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textViewAge"
@@ -100,6 +111,7 @@
 
     <TextView
         android:id="@+id/textViewHeight"
+        style="@style/TextViewDrTick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textViewWeight"
@@ -126,6 +138,7 @@
 
      <TextView
         android:id="@+id/textViewGender"
+        style="@style/TextViewDrTick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textViewName"

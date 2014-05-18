@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="EditTextDrTick" parent="android:Widget.EditText">
+	  <item name="android:textColor">@color/theme7_black</item>
+  </style>
+  
+  <style name="TextViewDrTick">
+	  <item name="android:textColor">@color/theme7_black</item>
+  </style>
+  
+    <style name="RadioButtonDrTick" parent="android:Widget.CompoundButton.RadioButton">
+      <item name="android:textColor">@color/theme7_black</item>
+  </style>
+    <style name="CheckBoxDrTick" parent="android:Widget.CompoundButton.CheckBox">
+      <item name="android:textColor">@color/theme7_black</item>
+  </style>
+  
+    
+  <style name="ButtonDrTick" parent="android:Widget.Button">
+	  <item name="android:background">@drawable/button_bg</item>
+	  <item name="android:shadowColor">@color/theme4_gray</item>
+	  <item name="android:minHeight">48dip</item>
+	  <item name="android:minWidth">64dip</item>
+	  <item name="android:textColor">@color/theme1_light</item>
+  </style>
+
+
+  <style name="TabTextDrTick">
+	  <item name="android:textColor">@color/theme1_light</item>
+      <item name="android:textSize">12sp</item>
+      <item name="android:textStyle">bold</item>
+      <item name="android:ellipsize">marquee</item>
+      <item name="android:maxLines">2</item>
+      <item name="android:maxWidth">180dip</item>
+  </style>  
+  
+  
+
+<!-- 
+
+  
+  <style name="TabDrTick">
+      <item name="android:gravity">center_horizontal</item>
+      <item name="android:paddingLeft">16dip</item>
+      <item name="android:paddingRight">16dip</item>
+      <item name="android:background">@layout/drtick_tab_indicator</item>
+      <item name="android:layout_width">0dip</item>
+      <item name="android:layout_weight">1</item>
+      <item name="android:minWidth">80dip</item>
+  </style>
+  
+
+
+
+
+
+  <style name="ImageButtonDrTick" parent="android:Widget.ImageButton">
+	  <item name="android:background">@drawable/drtick_btn_default_holo_light</item>
+  </style>
+
+
+  <style name="ProgressBarDrTick" parent="android:Widget.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/drtick_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/drtick_progress_indeterminate_horizontal_holo_light</item>
+      <item name="android:minHeight">16dip</item>
+      <item name="android:maxHeight">16dip</item>
+  </style>
+
+  <style name="SeekBarDrTick" parent="android:Widget.SeekBar">
+      <item name="android:progressDrawable">@drawable/drtick_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/drtick_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:minHeight">13dip</item>
+      <item name="android:maxHeight">13dip</item>
+      <item name="android:thumb">@drawable/drtick_scrubber_control_selector_holo_light</item>
+      <item name="android:thumbOffset">16dip</item>
+      <item name="android:paddingLeft">16dip</item>
+      <item name="android:paddingRight">16dip</item>
+  </style>
+-->
+
+</resources>

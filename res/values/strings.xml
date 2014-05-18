@@ -33,6 +33,11 @@
     <string name="is">است. </string>
     <string name="breathing_advice">بهتر است عمیق تر نفس بکشید.</string>
     <string name="activity_advice1"></string>
+    <string name="start_page">دکتر تیک | Dr. Tick</string>
+    <string name="help2">برای آشنایی بیشتر با این اپلیکیشن و نحوه ی عمکرد آن می توانید به لینک زیر مراجعه کنید:</string>
+    <string name="help3">http://ce.sharif.edu/~ghandeharioun/Dr.Tick</string>
+    <string name="profile_updated">پروفایل به روز رسانی شد.</string>
+    <string name="profile_updated_en">Profile updated.</string>
     
     
     

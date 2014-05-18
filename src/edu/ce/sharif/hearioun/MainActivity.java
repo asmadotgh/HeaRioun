@@ -1,14 +1,17 @@
 package edu.ce.sharif.hearioun;
 
 import android.app.TabActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
-import edu.ce.sharif.hearioun.database.PrefManager;
 
 public class MainActivity extends TabActivity {
 	
@@ -65,19 +68,17 @@ public class MainActivity extends TabActivity {
 		//set Windows tab as default (zero based)
 		tabHost.setCurrentTab(3);
 		
-
-				
-
-		
+	
 		
 	}
 
-/*
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}*/
-
+	private View createTabView(final Context context, final String text, final Drawable icon) {
+	    View view = LayoutInflater.from(context).inflate(R.layout.drtick_tab_indicator,
+	            null);
+	    ImageView iv= (ImageView) view.findViewById(R.id.tabIcon);
+	    iv.setBackground(icon);
+	    TextView tv = (TextView) view.findViewById(R.id.tabTitle);
+	    tv.setText(text);
+	    return view;
+	}
 }

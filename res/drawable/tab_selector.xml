@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- PRESSED TAB -->
+<item android:state_pressed="true" >
+    <shape>
+        <corners
+                android:topRightRadius="15dp"
+                android:topLeftRadius="15dp"/>
+        <gradient
+            android:startColor="@color/t_theme4_pink"
+            android:centerColor="@color/t_theme2_pink"
+            android:endColor="@color/t_theme1_light"
+            android:angle="270" />
+        
+    </shape>
+</item>
+
+<!-- ACTIVE TAB -->
+    <item android:state_selected="true"
+        android:state_focused="false"
+        android:state_pressed="false">
+        <shape>
+            <corners
+                android:topRightRadius="15dp"
+                android:topLeftRadius="15dp"/>
+            <gradient
+                android:startColor="@color/t_theme3_red"
+                android:centerColor="@color/t_theme3_red"
+            android:endColor="@color/t_theme2_pink"
+                android:angle="270" />
+        
+        </shape>
+    </item>
+    
+    <!-- SELECTED TAB -->
+    <item android:state_focused="true"
+        android:state_selected="true"
+        android:state_pressed="false">
+        <shape>
+            <corners
+                android:topRightRadius="15dp"
+                android:topLeftRadius="15dp"/>
+            <gradient
+                android:startColor="@color/t_theme3_red"
+                android:centerColor="@color/t_theme3_red"
+            android:endColor="@color/t_theme2_pink"
+                android:angle="270" />
+        
+        </shape>
+    </item>
+
+    <!-- INACTIVE TABS -->
+       <item android:state_selected="false"
+        android:state_focused="false"
+        android:state_pressed="false" >
+        <shape>
+            <corners
+                android:topRightRadius="15dp"
+                android:topLeftRadius="15dp"/>
+            <gradient
+                android:startColor="@color/t_theme4_pink"
+                android:centerColor="@color/t_theme4_pink"
+            	android:endColor="@color/t_theme4_pink"
+                android:angle="270" />
+		            
+        </shape>
+    </item>
+</selector>

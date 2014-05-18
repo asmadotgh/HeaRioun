@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- PRESSED -->
+<item android:state_pressed="true" >
+        <shape >
+            <solid 
+                android:color="@color/theme5_blue"/>
+        </shape>
+</item>
+
+<!-- ACTIVE-->
+    <item android:state_selected="true"
+        android:state_focused="false"
+        android:state_pressed="false">
+        <shape >
+            <solid 
+                android:color="@color/theme5_blue"/>
+        </shape>
+    </item>
+    
+    <!-- SELECTED-->
+    <item android:state_focused="true"
+        android:state_selected="true"
+        android:state_pressed="false">
+        <shape >
+            <solid 
+                android:color="@color/theme5_blue"/>
+        </shape>
+    </item>
+
+    <!-- INACTIVE -->
+       <item android:state_selected="false"
+        android:state_focused="false"
+        android:state_pressed="false" >
+        <shape >
+            <solid 
+                android:color="@color/theme2_light_violet"/>
+        </shape>
+        
+    </item>
+</selector>

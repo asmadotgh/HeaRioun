@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -33,6 +33,76 @@
         <item name="androidplot.domainLabel">my domain</item>-->
         <!--<item name="XYPlot:androidplot.title">my domain</item>-->
     </style>
+    
+    
+    
+    
+    <!-- FOR SPLASH -->
+    
+    <style name="Animations" parent="@android:Animation" /> 
+    <style name="Animations.SplashScreen"> 
+        <item name="android:windowEnterAnimation">@layout/appear</item> 
+        <item name="android:windowExitAnimation">@layout/disappear</item>  
+    </style> 
+
+<style name="Theme.Transparent" parent="android:Theme"> 
+        <item name="android:windowIsTranslucent">true</item> 
+        <item name="android:windowBackground">@android:color/transparent</item> 
+        <item name="android:windowContentOverlay">@null</item> 
+        <item name="android:windowNoTitle">true</item> 
+        <item name="android:windowIsFloating">true</item> 
+        <item name="android:backgroundDimEnabled">false</item> 
+        <item name="android:windowAnimationStyle">@style/Animations.SplashScreen</item> 
+    </style>
+    
+    <!-- MY NEW BEAUTIFUL THEME :D -->
+    <color name="theme1_light">#efeef4</color>
+    <color name="theme2_light_violet">#b57ec2</color>
+    <color name="theme3_violet">#74427d</color>
+    <color name="theme4_gray">#72697a</color>
+    <color name="theme5_blue">#97a4c7</color>
+    <color name="theme6_light_blue">#d7d5ed</color>
+    <color name="theme7_black">#000000</color>
+    <color name="theme8_blue_graph">#68bfc9</color>
+    <color name="theme9_green_graph">#d5e673</color>
+    
+    
+	<style name="mainTheme" parent="android:Theme.NoTitleBar">
+    <item name="android:windowBackground">@layout/background_gradient</item>
+    <item name="android:radioButtonStyle">@style/RadioButtonDrTick</item>
+    <item name="android:checkboxStyle">@style/CheckBoxDrTick</item>
+    <item name="android:buttonStyle">@style/ButtonDrTick</item>
+    </style>    
+    
+    
+    <!-- MY NEW BEAUTIFUL THEME :D -->
+    <color name="t_theme1_light">#fdf5de</color>
+    <color name="t_theme2_pink">#f4b8ad</color>
+    <color name="t_theme3_red">#df1d40</color>
+    <color name="t_theme4_pink">#e75568</color>
+    <color name="t_theme5_brown">#583a16</color>
+    
+<style name="DrTickTheme" parent="android:Theme.Light">
+    <item name="android:windowBackground">@color/theme1_light</item>
+       
+	<item name="android:editTextStyle">@style/EditTextDrTick</item>
+
+	<item name="android:textColor">@color/t_theme5_brown</item>
+
+    <item name="android:textColorHighlight">@color/t_theme2_pink</item>
+
+    <!-- 
+    <item name="android:checkboxStyle">@style/CheckBoxDrTick</item>
+
+    <item name="android:radioButtonStyle">@style/RadioButtonDrTick</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonDrTick</item>
+  
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarDrTick</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarDrTick</item>
+ -->
+</style>
 
 
 </resources>

@@ -567,9 +567,9 @@ public class Measure extends Activity {
     	stopButton.setEnabled(false);
     	stopButton.setBackgroundResource(R.drawable.stopd);
     	
-		ImageView still = (ImageView) Measure.this.findViewById(R.id.progressBarStill);
+		//ImageView still = (ImageView) Measure.this.findViewById(R.id.progressBarStill);
 		
-		still.setVisibility(View.VISIBLE);
+		//still.setVisibility(View.VISIBLE);
 		progressBar.setVisibility(View.INVISIBLE);
 		
 		final Parameters p = camera.getParameters();
@@ -594,6 +594,10 @@ public class Measure extends Activity {
 				stop.setEnabled(false);
 				stop.setBackgroundResource(R.drawable.stopd);
 				
+				TextView tv=(TextView) Measure.this.findViewById(R.id.progressText);
+				tv.setText(getString(R.string.press_start));
+				tv.setVisibility(View.VISIBLE);
+				
 				
 				prefManager=new PrefManager(Measure.this);
 				prefManager.loadSavedPreferences();
@@ -616,7 +620,7 @@ public class Measure extends Activity {
     	
 		ImageView still = (ImageView) Measure.this.findViewById(R.id.progressBarStill);
 		
-		still.setVisibility(View.INVISIBLE);
+		//still.setVisibility(View.INVISIBLE);
 		progressBar.setVisibility(View.VISIBLE);
 		
 		new Thread(progressRunnable).start();
@@ -639,7 +643,7 @@ public class Measure extends Activity {
     	
 		ImageView still = (ImageView) Measure.this.findViewById(R.id.progressBarStill);
 		
-		still.setVisibility(View.VISIBLE);
+		//still.setVisibility(View.VISIBLE);
 		progressBar.setVisibility(View.INVISIBLE);
 		
 		final Parameters p = camera.getParameters();

@@ -21,6 +21,11 @@ public class Help extends Activity {
 		//all text views
 		TextView tmp=(TextView)findViewById(R.id.textViewHelp);
 		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewHelp2);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewHelp3);
+		tmp.setTypeface(font_fa);
+		
 	}
 
 	@Override
