@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/help_part1"
     android:layout_width="340dp"
@@ -11,49 +11,213 @@
     tools:context=".Help" >
     
 
+        <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
     <TextView
-        android:id="@+id/textViewHelp"
-        style="@style/TextViewDrTick"
+        android:id="@+id/textViewHelp_h1"
+        style="@style/HelpTextHead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:text="@string/help" />
+        android:text="@string/help_h1" />
 
+    
+        <TextView
+        android:id="@+id/textViewHelp1"
+        style="@style/HelpTextBody"
+        android:layout_below="@+id/textViewHelp_h1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/help1" />
+        
     <ImageView
         android:id="@+id/imageViewHelp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewHelp"
+        android:layout_below="@+id/textViewHelp1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/help_info" />
-    
+
         <TextView
-        android:id="@+id/textViewHelp2"
-        style="@style/TextViewDrTick"
+        android:id="@+id/textViewHelp_h2"
+        style="@style/HelpTextHead"
         android:layout_below="@+id/imageViewHelp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
+        android:text="@string/help_h2" />
+    
+    <TextView
+        android:id="@+id/textViewHelp2"
+        style="@style/HelpTextBody"
+        android:layout_below="@+id/textViewHelp_h2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:text="@string/help2" />
 
-
-<TextView
-        android:id="@+id/textViewHelp3"
-        android:autoLink="web"
-        style="@style/TextViewDrTick"
+    
+    <TextView
+        android:id="@+id/textViewHelp_h3"
+        style="@style/HelpTextHead"
         android:layout_below="@+id/textViewHelp2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:clickable="true"
+        android:text="@string/help_h3" />
+    
+    <TextView
+        android:id="@+id/textViewHelp3"
+        style="@style/HelpTextBody"
+        android:layout_below="@+id/textViewHelp_h3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:text="@string/help3" />
+    
+    <TextView
+        android:id="@+id/textViewHelp_h4"
+        style="@style/HelpTextHead"
+        android:layout_below="@+id/textViewHelp3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/help_h4" />
+    
+    <TextView
+        android:id="@+id/textViewHelp4"
+        style="@style/HelpTextBody"
+        android:layout_below="@+id/textViewHelp_h4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/help4" />   
+        
+    <TextView
+        android:id="@+id/textViewHelp_h5"
+        style="@style/HelpTextHead"
+        android:layout_below="@+id/textViewHelp4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/help_h5" />
+    
+    <TextView
+        android:id="@+id/textViewHelp5_1"
+        style="@style/HelpTextBody"
+        android:layout_below="@+id/textViewHelp_h5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/help5_1" />   
+	<TextView
+        android:id="@+id/textViewHelp5_2"
+        style="@style/HelpTextBodyEng"
+        android:layout_below="@+id/textViewHelp5_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/help5_2" /> 
+    <TextView
+        android:id="@+id/textViewHelp5_3"
+        style="@style/HelpTextBody"
+        android:layout_below="@+id/textViewHelp5_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/help5_3" />    
+	<TextView
+        android:id="@+id/textViewHelp5_4"
+        style="@style/HelpTextBodyEng"
+        android:layout_below="@+id/textViewHelp5_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/help5_4" /> 
+        
+    <TextView
+        android:id="@+id/textViewHelp5_5"
+        style="@style/HelpTextBody"
+        android:layout_below="@+id/textViewHelp5_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/help5_5" /> 	
+        
+    <TextView
+        android:id="@+id/textViewHelp_h6"
+        style="@style/HelpTextHead"
+        android:layout_below="@+id/textViewHelp5_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/help_h6" />
+    
+    <TextView
+        android:id="@+id/textViewHelp6_1"
+        style="@style/HelpTextBody"
+        android:layout_below="@+id/textViewHelp_h6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/help6_1" />
+    
 
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/textViewHelp6_2"
+        style="@style/HelpTextBodyEng"
+        android:layout_below="@+id/textViewHelp6_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:autoLink="web"
+        android:text="@string/help6_2" />    
+        
+    <TextView
+        android:id="@+id/textViewHelp6_3"
+        style="@style/HelpTextBody"
+        android:layout_below="@+id/textViewHelp6_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/help6_3" />
+    
+
+    <TextView
+        android:id="@+id/textViewHelp6_4"
+        style="@style/HelpTextBodyEng"
+        android:layout_below="@+id/textViewHelp6_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:autoLink="web"
+        android:text="@string/help6_4" />   
+        
+    <TextView
+        android:id="@+id/textViewHelp6_5"
+        style="@style/HelpTextBodyEng"
+        android:layout_below="@+id/textViewHelp6_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:autoLink="web"
+        android:text="@string/help6_5" />       
+    
+</RelativeLayout>
+</ScrollView>

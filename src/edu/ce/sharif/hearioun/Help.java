@@ -19,12 +19,41 @@ public class Help extends Activity {
 		Typeface font_fa = Typeface.createFromAsset(getAssets(), "fonts/bnazanin.ttf");
 
 		//all text views
-		TextView tmp=(TextView)findViewById(R.id.textViewHelp);
+		TextView tmp=(TextView)findViewById(R.id.textViewHelp_h1);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewHelp1);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewHelp_h2);
 		tmp.setTypeface(font_fa);
 		tmp=(TextView)findViewById(R.id.textViewHelp2);
 		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewHelp_h3);
+		tmp.setTypeface(font_fa);
 		tmp=(TextView)findViewById(R.id.textViewHelp3);
 		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewHelp_h4);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewHelp4);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewHelp_h5);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewHelp5_1);
+		tmp.setTypeface(font_fa);
+		//5.2: English
+		tmp=(TextView)findViewById(R.id.textViewHelp5_3);
+		tmp.setTypeface(font_fa);
+		//5.4: English
+		tmp=(TextView)findViewById(R.id.textViewHelp5_5);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewHelp_h6);
+		tmp.setTypeface(font_fa);
+		tmp=(TextView)findViewById(R.id.textViewHelp6_1);
+		tmp.setTypeface(font_fa);
+		//6.2: link in English
+		tmp=(TextView)findViewById(R.id.textViewHelp6_3);
+		tmp.setTypeface(font_fa);
+		//6.4, 6.5: links in English
+
 		
 	}
 
