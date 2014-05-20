@@ -594,7 +594,7 @@ public class Measure extends Activity {
 		myMsg.setText(this.getResources().getString(R.string.HR_text)+HR+"\n"+this.getResources().getString(R.string.BR_text)+BR);
 		myMsg.setTextSize(20);
 		myMsg.setPadding(10, 0, 0, 5);
-		myMsg.setGravity(Gravity.RIGHT);
+		myMsg.setGravity(Gravity.CENTER_HORIZONTAL);
 		builder.setView(myMsg);
 		builder.setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dlg,

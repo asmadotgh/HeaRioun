@@ -31,9 +31,9 @@
             androidPlot.legendWidget.iconSizeMetrics.heightMetric.value="10dp"
             androidPlot.legendWidget.iconSizeMetrics.widthMetric.value="10dp"
             androidPlot.legendWidget.widthMetric.value="1"
-            androidPlot.legendWidget.heightMetric.value="25dp"
+            androidPlot.legendWidget.heightMetric.value="30dp"
             androidPlot.legendWidget.positionMetrics.xPositionMetric.value="100dp"
-            androidPlot.legendWidget.positionMetrics.yPositionMetric.value="7dp"
+            androidPlot.legendWidget.positionMetrics.yPositionMetric.value="0dp"
             androidPlot.legendWidget.positionMetrics.anchor="bottom_middle"
             android:layout_weight="1"/>
 
