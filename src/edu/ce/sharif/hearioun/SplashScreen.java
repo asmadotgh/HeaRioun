@@ -9,8 +9,7 @@ public class SplashScreen extends Activity {
 	     
 	    /** 
 	     * The thread to process splash screen events 
-	     */ 
-	    private Thread mSplashThread;     
+	     */
 	 
 	    /** Called when the activity is first created. */ 
 	    @Override 
@@ -32,7 +31,7 @@ public class SplashScreen extends Activity {
 	                // close this activity
 	                finish();
 	            }
-	        }, 5*1000); // wait for 5 seconds
+	        }, 3*1000);
 	        
 	        /*
 	         

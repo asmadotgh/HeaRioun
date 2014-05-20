@@ -87,6 +87,7 @@ public class Measure extends Activity {
 	//as long as 10 seconds in the beginning
 	static double SIGNAL_FPS=8.5; //9 // 11 previously //23.5 old phone
 	static int SIGNAL_SIZE=(int) (SIGNAL_FPS*SIGNAL_SECONDS); //instead of 66
+	static int SIGNAL_UPDATE=(int)(SIGNAL_SIZE/SIGNAL_SECONDS);
 	
 	//FOR DYNAMIC MEASURMENT OF FPS RELATED STUFF
 	private long start_time, end_time;
@@ -118,6 +119,7 @@ public class Measure extends Activity {
 			//FOR DYNAMIC MEASURMENT OF FPS RELATED STUFF
 			end_time=System.currentTimeMillis();
 			SIGNAL_SECONDS=(end_time-start_time)/1000.0;
+			SIGNAL_FPS=(double)SIGNAL_SIZE/SIGNAL_SECONDS;
 		}else if (SIGNAL_IND==1)
 			start_time=System.currentTimeMillis();
 	}
@@ -158,7 +160,7 @@ public class Measure extends Activity {
 				input_singal[i+SIGNAL_SIZE-SIGNAL_IND]=SIGNAL[i];
 			signalProcess=new SignalProcess(input_singal, SIGNAL_FPS);
 			res.val1= signalProcess.computeWithPeakMeasurement();
-			res.val2= signalProcess.computeBRWithPeakMeasurement();
+			res.val2= signalProcess.computeBRWithPeakTimeMeasurement();
 		}
 		return res;
 	}
@@ -186,37 +188,37 @@ public class Measure extends Activity {
             		progress=100*SIGNAL_IND/SIGNAL_SIZE;
              }
             hnd.sendMessage(hnd.obtainMessage());
-
         }
-        Handler hnd = new Handler()
-        {    
-            @Override
-            public void handleMessage(Message msg) 
-            {
-            	ImageButton startButton=(ImageButton) Measure.this.findViewById(R.id.startButton);
-            	ImageButton stopButton=(ImageButton) Measure.this.findViewById(R.id.stopButton);
-        		if(progress<100){
-        			startButton.setEnabled(false);
-        			startButton.setBackgroundResource(R.drawable.startd);
-        			stopButton.setEnabled(false);
-        			stopButton.setBackgroundResource(R.drawable.stopd);
-        		}else{
-        			if(processing.get()){
-        				startButton.setEnabled(true);
-        				startButton.setBackgroundResource(R.drawable.start);
-        				stopButton.setEnabled(false);
-        				stopButton.setBackgroundResource(R.drawable.stopd);
-        			}
-        			else{
-        				stopButton.setEnabled(true);
-        				stopButton.setBackgroundResource(R.drawable.stop);
-        				startButton.setEnabled(false);
-        				startButton.setBackgroundResource(R.drawable.startd);
-        			}
-        		}
-                
-            }
-        };
+        
+        Handler hnd = new Handler(new Handler.Callback() {
+  
+                @Override
+                public boolean handleMessage(Message msg) 
+                {
+                	ImageButton startButton=(ImageButton) Measure.this.findViewById(R.id.startButton);
+                	ImageButton stopButton=(ImageButton) Measure.this.findViewById(R.id.stopButton);
+            		if(progress<100){
+            			startButton.setEnabled(false);
+            			startButton.setBackgroundResource(R.drawable.startd);
+            			stopButton.setEnabled(false);
+            			stopButton.setBackgroundResource(R.drawable.stopd);
+            		}else{
+            			if(processing.get()){
+            				startButton.setEnabled(true);
+            				startButton.setBackgroundResource(R.drawable.start);
+            				stopButton.setEnabled(false);
+            				stopButton.setBackgroundResource(R.drawable.stopd);
+            			}
+            			else{
+            				stopButton.setEnabled(true);
+            				stopButton.setBackgroundResource(R.drawable.stop);
+            				startButton.setEnabled(false);
+            				startButton.setBackgroundResource(R.drawable.startd);
+            			}
+            		}
+            		return false;
+                }
+		});
     };
     /**********			END progress bar					**********/
     
@@ -411,13 +413,16 @@ public class Measure extends Activity {
 			//int imgAvg = ImageProcessing.getRedAvg(data.clone(), height, width);
 			addToSignal(imgAvg);
 			MyPoint res=processSignal();
-			HR=res.val1;
-			TextView hr=(TextView)findViewById(R.id.TextViewHRAmount);
-			hr.setText(HR+"");
-			
-			BR=res.val2;
-			TextView br=(TextView)findViewById(R.id.TextViewBRAmount);
-			br.setText(BR+"");
+			if(SIGNAL_IND%SIGNAL_UPDATE==0)
+			{
+				HR=res.val1;
+				TextView hr=(TextView)findViewById(R.id.TextViewHRAmount);
+				hr.setText(HR+"");
+
+				BR=res.val2;
+				TextView br=(TextView)findViewById(R.id.TextViewBRAmount);
+				br.setText(BR+"");
+			}
 			/************			END processing signal 						**********/
 
 
@@ -607,6 +612,9 @@ public class Measure extends Activity {
 			}
 		});
 
+		/*LayoutInflater inflater = getLayoutInflater();
+		View dialogLayout = inflater.inflate(R.layout.popup, (ViewGroup) getCurrentFocus());
+		builder.setView(dialogLayout);*/
 		final AlertDialog dialog = builder.create();
 		dialog.show();
 	}
@@ -618,7 +626,7 @@ public class Measure extends Activity {
     	stopButton.setBackgroundResource(R.drawable.stopd);
     	
     	
-		ImageView still = (ImageView) Measure.this.findViewById(R.id.progressBarStill);
+		//ImageView still = (ImageView) Measure.this.findViewById(R.id.progressBarStill);
 		
 		//still.setVisibility(View.INVISIBLE);
 		progressBar.setVisibility(View.VISIBLE);

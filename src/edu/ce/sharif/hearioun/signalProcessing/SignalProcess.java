@@ -57,7 +57,7 @@ public class SignalProcess {
 		BPM_L = 40;							
 		BPM_H = 230;	
 		BR_L=8;
-		BR_H=60;
+		BR_H=20;
 		//fcl=BPM_L/60.0/fps*2;
 		//fch=BPM_H/60.0/fps*2;
 		FILTER_STABILIZATION_TIME = 1;				
@@ -272,8 +272,35 @@ public class SignalProcess {
 		for(int i=0;i<tmp.size()-1;i++)
 			if(tmp.get(i)==1 && tmp.get(i+1)==-1)
 				num++;
-
 		return num;
+	}
+	
+	private int countPeaksTime(int [] inp){
+		//version 4
+		ArrayList<Integer> res=new ArrayList<Integer>();
+		ArrayList<Integer> tmp=new ArrayList<Integer>();
+		for(int i=1;i<inp.length;i++){
+			if(inp[i]>inp[i-1])
+				tmp.add(i);
+			else if (inp[i]<inp[i-1])
+				tmp.add(-1*i);
+		}
+
+		for(int i=0;i<tmp.size()-1;i++)
+			if(tmp.get(i)>0 && tmp.get(i+1)<0)
+				res.add(tmp.get(i));
+		if(tmp.get(tmp.size()-1)>0)
+			res.add(tmp.get(tmp.size()-1));
+		
+		int avgTime;
+		if(res.size()==0)
+			avgTime=inp.length;
+		else if(res.size()==1)
+			avgTime=inp.length-res.get(0);
+		else
+			avgTime=res.get(1)-res.get(0);
+		
+		return avgTime;
 	}
 
 
@@ -324,6 +351,31 @@ public class SignalProcess {
 		if(br>BR_H)
 			br=BR_H;
 		return smoothBPMwithPower(BR_L, BR_H, br,y_BR);
+	}
+	
+	public int computeBRWithPeakTimeMeasurement(){
+		//double average filter for finding out breathing pattern
+
+		double br;
+
+		myAverageFilter(y, y_BR, AVERAGING_LENGTH);
+		myAverageFilter(y_BR, y_BR, AVERAGING_LENGTH);
+
+		//FOR DEBUG
+		/*System.out.println("Smoothed for BR measurement:");
+		for(int j=0;j<y_BR.length; j++)
+			System.out.println(y_BR[j]);
+		System.out.println();*/
+
+		int tPeaks=countPeaksTime(y_BR);
+
+		br=60.0/(tPeaks/fps);
+		if(br<BR_L)
+			br=BR_L;
+		if(br>BR_H)
+			br=BR_H;
+		return (int)br;
+		//return smoothBPMwithPower(BR_L, BR_H, br,y_BR);
 	}
 
 	private int smoothBPMwithPower(int lowVal, int highVal, double bpm, int [] array){
