@@ -132,6 +132,16 @@ public class Measure extends Activity {
 	
 	public MyPoint processSignal(){
 		MyPoint res= new MyPoint();
+		if(SIGNAL_ACQUIRED){
+			int [] input_singal=new int[SIGNAL_SIZE];
+			for(int i=SIGNAL_IND;i<SIGNAL_SIZE;i++)
+				input_singal[i-SIGNAL_IND]=SIGNAL[i];
+			for(int i=0;i<SIGNAL_IND;i++)
+				input_singal[i+SIGNAL_SIZE-SIGNAL_IND]=SIGNAL[i];
+			signalProcess=new SignalProcess(input_singal, SIGNAL_FPS);
+			res.val1= signalProcess.computeWithPeakMeasurement();
+			res.val2= signalProcess.computeBRWithPeakTimeMeasurement();
+		}
 		TextView tv=(TextView) findViewById(R.id.progressText);
 		autoStop=autoStop_cb.isChecked();
 		if (progress>=100){
@@ -139,6 +149,8 @@ public class Measure extends Activity {
 			tv.setText("Done!");
 			//if still measuring, toggles as if the stop button is clicked
 			if(autoStop && progress==100){
+				HR=res.val1;
+				BR=res.val2;
 				myStop();
 				progress=101;
 			}
@@ -152,16 +164,6 @@ public class Measure extends Activity {
 				tv.setText((int) (myMin(((100-progress)*myMin(SIGNAL_SECONDS,10)/100)+1,10))+" "+getString(R.string.seconds_left));
 		}
 		
-		if(SIGNAL_ACQUIRED){
-			int [] input_singal=new int[SIGNAL_SIZE];
-			for(int i=SIGNAL_IND;i<SIGNAL_SIZE;i++)
-				input_singal[i-SIGNAL_IND]=SIGNAL[i];
-			for(int i=0;i<SIGNAL_IND;i++)
-				input_singal[i+SIGNAL_SIZE-SIGNAL_IND]=SIGNAL[i];
-			signalProcess=new SignalProcess(input_singal, SIGNAL_FPS);
-			res.val1= signalProcess.computeWithPeakMeasurement();
-			res.val2= signalProcess.computeBRWithPeakTimeMeasurement();
-		}
 		return res;
 	}
 
@@ -584,10 +586,15 @@ public class Measure extends Activity {
 		
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		TextView myMsg = new TextView(this);
-		myMsg.setText("TODO:\n\nDecision tree here. is the person:\n\n*Healthy?\n*Needs exercise?\n*At risk?\n*etc.");
+		System.out.println(HR+" "+BR);
+		//setting the font
+		Typeface font_fa = Typeface.createFromAsset(getAssets(), "fonts/bnazanin.ttf");
+
+		myMsg.setTypeface(font_fa);
+		myMsg.setText(this.getResources().getString(R.string.HR_text)+HR+"\n"+this.getResources().getString(R.string.BR_text)+BR);
 		myMsg.setTextSize(20);
 		myMsg.setPadding(10, 0, 0, 5);
-		myMsg.setGravity(Gravity.LEFT);
+		myMsg.setGravity(Gravity.RIGHT);
 		builder.setView(myMsg);
 		builder.setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dlg,
@@ -602,7 +609,6 @@ public class Measure extends Activity {
 				TextView tv=(TextView) Measure.this.findViewById(R.id.progressText);
 				tv.setText(getString(R.string.press_start));
 				tv.setVisibility(View.VISIBLE);
-				
 				
 				prefManager=new PrefManager(Measure.this);
 				prefManager.loadSavedPreferences();

@@ -289,7 +289,7 @@ public class SignalProcess {
 		for(int i=0;i<tmp.size()-1;i++)
 			if(tmp.get(i)>0 && tmp.get(i+1)<0)
 				res.add(tmp.get(i));
-		if(tmp.get(tmp.size()-1)>0)
+		if(tmp.size()>0 && tmp.get(tmp.size()-1)>0)
 			res.add(tmp.get(tmp.size()-1));
 		
 		int avgTime;
