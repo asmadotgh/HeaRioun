@@ -1,6 +1,7 @@
 package edu.ce.sharif.hearioun;
 
 
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.app.Activity;
@@ -21,6 +22,7 @@ import android.os.Message;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -48,7 +50,10 @@ public class Measure extends Activity {
 	SignalProcess signalProcess=null;
 
 	static int HR=0, BR=0;
+	
+	//for camera
 	private static Camera camera=null;
+	private SurfaceView fakeCameraSurface;
 
 	//private View image = null;
 	//private TextView text = null;
@@ -346,6 +351,12 @@ public class Measure extends Activity {
 	    breathingGraph.setBackgroundDrawable(breathingCanvas.drawBreathing());
 	    
 	    camera=Camera.open();
+	    fakeCameraSurface=(SurfaceView) findViewById(R.id.fake_camera);
+	    try {
+			camera.setPreviewDisplay(fakeCameraSurface.getHolder());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		camera.setPreviewCallback(previewCallback);
 		camera.startPreview();
 	    
@@ -362,13 +373,16 @@ public class Measure extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(camera==null)
+		if(camera==null){
 			camera=Camera.open();
-		/*final Parameters p = camera.getParameters();
-		p.setFlashMode(Parameters.FLASH_MODE_TORCH);
-		camera.setParameters(p);*/
-		camera.setPreviewCallback(previewCallback);
-		camera.startPreview();
+		    try {
+				camera.setPreviewDisplay(fakeCameraSurface.getHolder());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			camera.setPreviewCallback(previewCallback);
+			camera.startPreview();
+		}
 		initializeBeat();
 	}
 
@@ -648,6 +662,13 @@ public class Measure extends Activity {
 		final Parameters p = camera.getParameters();
 		p.setFlashMode(Parameters.FLASH_MODE_TORCH);
 		camera.setParameters(p);
+	    try {
+			camera.setPreviewDisplay(fakeCameraSurface.getHolder());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    camera.setPreviewCallback(previewCallback);
+	    camera.startPreview();
 		processing.set(false);
 	}
 	

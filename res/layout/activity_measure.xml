@@ -12,7 +12,7 @@
         android:background="@layout/round_frame">
     <FrameLayout 
         android:id="@+id/ECG"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp">
@@ -61,7 +61,7 @@
         android:layout_below="@+id/ECG"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/imageViewPaperTray2"
@@ -137,7 +137,12 @@
         android:layout_marginTop="10dp"
         android:visibility="invisible"
 />
-        
+    <SurfaceView 
+        android:id="@+id/fake_camera"
+        android:layout_width="1px"
+        android:layout_height="1px"
+        android:layout_toLeftOf="@+id/progressBar"
+        android:visibility="visible" />      
         
              <TextView
         android:id="@+id/progressText"
@@ -206,20 +211,29 @@
     
     </RelativeLayout>
     
+    
+    
     <RelativeLayout 
         android:id="@+id/measure_part2"
         android:layout_below="@+id/measure_part1"
         android:layout_marginTop="10dp"
         android:layout_width="340dp"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         android:background="@layout/round_frame">
+    <ScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ImageButton
         android:id="@+id/resetButton"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="65dp"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/startButton"
         android:onClick="resetClicked"
         android:background="@drawable/reset_button" />
     
@@ -228,8 +242,6 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/resetButton"
         android:onClick="startClicked"
         android:layout_centerHorizontal="true"
         android:background="@drawable/start_button"
@@ -252,9 +264,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/startButton"
+        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:text="@string/autostop" />
+    </RelativeLayout>
+    </ScrollView>
     </RelativeLayout>
 
 </RelativeLayout>
