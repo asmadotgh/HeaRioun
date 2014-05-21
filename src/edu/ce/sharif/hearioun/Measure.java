@@ -438,11 +438,17 @@ public class Measure extends Activity {
 			{
 				HR=res.val1;
 				TextView hr=(TextView)findViewById(R.id.TextViewHRAmount);
-				hr.setText(HR+"");
+				if(HR==0)
+					hr.setText(getResources().getString(R.string.measuring));
+				else
+					hr.setText(HR+"");
 
 				BR=res.val2;
 				TextView br=(TextView)findViewById(R.id.TextViewBRAmount);
-				br.setText(BR+"");
+				if(BR==0)
+					br.setText(getResources().getString(R.string.measuring));
+				else
+					br.setText(BR+"");
 			}
 			/************			END processing signal 						**********/
 
@@ -535,7 +541,7 @@ public class Measure extends Activity {
 	private void beat(){
 		//animating the beating heart
 		ImageView tmp=(ImageView)findViewById(R.id.imageViewBeat);
-		beatMatrix.setTranslate(0,59*direction);
+		beatMatrix.setTranslate(0,tmp.getHeight()*direction);
 		tmp.setImageMatrix(beatMatrix);
 		tmp.invalidate();
 	}

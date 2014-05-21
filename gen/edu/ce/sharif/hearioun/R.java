@@ -315,6 +315,7 @@ public final class R {
         public static final int is=0x7f07003e;
         public static final int male=0x7f07000c;
         public static final int male_en=0x7f07000d;
+        public static final int measuring=0x7f070058;
         public static final int physical_activity=0x7f07003d;
         public static final int press_start=0x7f07001b;
         public static final int press_start_en=0x7f07001c;
