@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="edu.ce.sharif.hearioun"
+    android:versionCode="1"
+    android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+     <uses-sdk
+         android:minSdkVersion="8"
+         android:targetSdkVersion="19"/>
+     
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+
+    <application
+        
+        android:theme="@style/mainTheme"
+        android:allowBackup="true"
+        android:icon="@drawable/violet"
+        android:label="@string/app_name">
+        <!-- android:theme="@style/AppThemeDark" -->
+        
+        <!-- android:theme="@style/AppTheme" > -->
+        <activity
+            android:name="edu.ce.sharif.hearioun.model.ECGDrawer">
+        </activity>
+        <activity
+            android:name="edu.ce.sharif.hearioun.TouchZoomExampleActivity">
+        </activity>
+        
+        <activity
+            android:name="edu.ce.sharif.hearioun.Measure">
+        </activity>
+        <activity
+            android:name="edu.ce.sharif.hearioun.Help"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.ce.sharif.hearioun.Profile">
+        </activity>
+        <activity
+            android:name="edu.ce.sharif.hearioun.History">
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name="edu.ce.sharif.hearioun.MainActivity"
+            android:screenOrientation="portrait" >
+            
+        </activity>
+<activity  
+    android:name="SplashScreen" 
+    android:theme="@style/Theme.Transparent"             
+> 
+    <intent-filter> 
+        <action android:name="android.intent.action.MAIN"></action> 
+        <category android:name="android.intent.category.LAUNCHER"></category> 
+    </intent-filter> 
+</activity> 
+
+    </application>
+
+</manifest>
+
+<!-- android:theme="@android:style/Theme.NoTitleBar" -->

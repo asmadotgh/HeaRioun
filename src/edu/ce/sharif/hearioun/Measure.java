@@ -345,6 +345,10 @@ public class Measure extends Activity {
 	    breathingGraph = (LinearLayout) findViewById(R.id.breathingView);
 	    breathingGraph.setBackgroundDrawable(breathingCanvas.drawBreathing());
 	    
+	    camera=Camera.open();
+		camera.setPreviewCallback(previewCallback);
+		camera.startPreview();
+	    
 
 	}
 
@@ -358,7 +362,8 @@ public class Measure extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		camera=Camera.open();
+		if(camera==null)
+			camera=Camera.open();
 		/*final Parameters p = camera.getParameters();
 		p.setFlashMode(Parameters.FLASH_MODE_TORCH);
 		camera.setParameters(p);*/
@@ -586,7 +591,6 @@ public class Measure extends Activity {
 		
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		TextView myMsg = new TextView(this);
-		System.out.println(HR+" "+BR);
 		//setting the font
 		Typeface font_fa = Typeface.createFromAsset(getAssets(), "fonts/bnazanin.ttf");
 
