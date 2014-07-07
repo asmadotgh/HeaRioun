@@ -7,7 +7,7 @@
 
     <RelativeLayout 
         android:id="@+id/measure_part1"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="335dp"
         android:background="@layout/round_frame">
     <FrameLayout 
@@ -217,7 +217,7 @@
         android:id="@+id/measure_part2"
         android:layout_below="@+id/measure_part1"
         android:layout_marginTop="10dp"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@layout/round_frame">
     <ScrollView 
