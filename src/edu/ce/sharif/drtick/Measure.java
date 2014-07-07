@@ -25,12 +25,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import edu.ce.sharif.drtick.database.PrefManager;
 import edu.ce.sharif.drtick.graphicComponents.BreathingCanvas;
@@ -53,7 +53,7 @@ public class Measure extends Activity {
 	private final static int HR_INTERVAL=MAX_HR-MIN_HR;
 	
 	private final static int MIN_BR=4;
-	private final static int MAX_BR=40;
+	private final static int MAX_BR=25;
 	private final static int BR_INTERVAL=MAX_BR-MIN_BR;
 	
 	
@@ -619,8 +619,9 @@ public class Measure extends Activity {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		//setting the font
 		Typeface font_fa = Typeface.createFromAsset(getAssets(), "fonts/bnazanin.ttf");
-		Display display = getWindowManager().getDefaultDisplay(); 
-		int barWidth = display.getWidth(); 
+		//Display display = getWindowManager().getDefaultDisplay(); 
+		int barPadding=32;
+		int barWidth = 595;//display.getWidth()-2*barPadding;
 		
 		//HR
 		TextView HRDialog = (TextView)dialoglayout.findViewById(R.id.HRTextDialog);
@@ -628,9 +629,9 @@ public class Measure extends Activity {
 
 		HRDialog.setTypeface(font_fa);
 		HRDialog.setText(this.getResources().getString(R.string.HR_text)+HR+" "+this.getResources().getString(R.string.per_minute));
-		int HROffset=Math.max(0,(HR-MIN_HR)*barWidth/HR_INTERVAL);
+		int HROffset=Math.max(0,barWidth*(HR-MIN_HR)/HR_INTERVAL)-barPadding;
+		System.out.println(HROffset);
 		HRArrow.setPadding(HROffset, 0, 0, 0);
-		System.out.println(barWidth);
 		
 		//BR
 		TextView BRDialog = (TextView)dialoglayout.findViewById(R.id.BRTextDialog);
@@ -638,8 +639,12 @@ public class Measure extends Activity {
 		
 		BRDialog.setTypeface(font_fa);
 		BRDialog.setText(this.getResources().getString(R.string.BR_text)+BR+" "+this.getResources().getString(R.string.per_minute));
-		int BROffset=Math.max(0, (BR-MIN_BR)*barWidth/BR_INTERVAL);
+		int BROffset=Math.max(0, barWidth*(BR-MIN_BR)/BR_INTERVAL)-barPadding;
+		System.out.println(BROffset);
 		BRArrow.setPadding(BROffset, 0, 0, 0);
+		/*lp = new LinearLayout.LayoutParams(BRArrow.getLayoutParams());
+		lp.setMargins(500, -40, 0, 0);
+		BRArrow.setLayoutParams(lp);*/
 		/*myMsg.setTextSize(20);
 		myMsg.setPadding(10, 0, 0, 5);
 		myMsg.setGravity(Gravity.CENTER_HORIZONTAL);*/
